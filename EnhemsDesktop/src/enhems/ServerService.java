@@ -23,8 +23,8 @@ import org.apache.http.util.EntityUtils;
 
 public class ServerService {
 	
-//	private static String serverRoot = "http://192.168.0.16:8080/AppBE/";
-	private static String serverRoot = "http://192.168.10.92:8080/AppBE/";
+	private static String serverRoot = "http://192.168.0.16:8080/AppBE/";
+//	private static String serverRoot = "http://192.168.10.92:8080/AppBE/";
 //	private static String serverRoot = "https://161.53.68.191:8443/AppBE/";
 
 	public static void executeRequest(ServerRequest request) {
