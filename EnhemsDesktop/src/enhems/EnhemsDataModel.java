@@ -49,10 +49,7 @@ public class EnhemsDataModel implements DataModel {
 				data = ServerService.GetCurrentValuesData(selectedRoom);
 			}
 			public void afterExecution() {
-				
 				graphs.clear();
-				
-				selectedRoom = data[0];
 				opMode = true;
 		        systemOn = true;
 		        if (data[5].equals("---")) {
@@ -215,6 +212,7 @@ public class EnhemsDataModel implements DataModel {
 
 	public void setSelectedRoom(String selectedRoom) {
 		this.selectedRoom = selectedRoom;
+		refreshData();
 		fireAllListeners();
 	}
 

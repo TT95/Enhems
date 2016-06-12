@@ -37,6 +37,8 @@ public class ControlPanel extends ElementsCustomPanel implements DataListener {
 	private String setPointToolTipText="Postavna vrijednost temperature za regulaciju";
 	private String FCSpeedToolTipTeext="Brzina vrtnje ventilatora";
 	private EnhemsDataModel dataModel;
+	private final static int defaultSetpoint = 22;
+	private final static int defaultFCspeed = 0;
 	
 	
 	public ControlPanel(String title, int paddings, int axis,
@@ -69,7 +71,14 @@ public class ControlPanel extends ElementsCustomPanel implements DataListener {
 		paramPanel.add(fcspeedField,c);
 
     	setValues.addActionListener((l)-> {
-    		showChangeDialog( getSetPointValue(),getFCSpeedValue()); 
+    		try {
+    			showChangeDialog( getSetPointValue(),getFCSpeedValue()); 
+    		} catch (Exception e) {
+    			Utilities.showErrorDialog("Info", "Vrijednosti se postavljaju prvi puta: \n "
+    					+ "predocene su uobicajene postavke koje trenutno ne vrijede \n"
+    					+ "(setpoint: "+defaultSetpoint+"°C, brzina ventilatora:"+defaultFCspeed+" )", this, e);
+    			showChangeDialog(defaultSetpoint,defaultFCspeed); 
+    		}
     		});
     	
 		setpointField.setEnabled(false);
@@ -182,12 +191,12 @@ public class ControlPanel extends ElementsCustomPanel implements DataListener {
 		setValues.setEnabled(false);
 	}
 	
-	public Integer getSetPointValue() {
+	public Integer getSetPointValue() throws Exception {
 		String text = setpointField.getText();
 		return Integer.parseInt(text.substring(0, text.length()-2));
 	}
 
-	public Integer getFCSpeedValue() {
+	public Integer getFCSpeedValue() throws Exception {
 		String text = fcspeedField.getText();
 		return Integer.parseInt(text);
 	}

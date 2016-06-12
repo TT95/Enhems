@@ -90,7 +90,7 @@ public class Enhems extends JFrame {
 	public void panelLogin() {
 		LoginProcess.createLoginGUI(this);
 	}
-
+	
 	private void mainGUI(String[] units) {
 		
 		dataModel = new EnhemsDataModel(units);
@@ -138,7 +138,6 @@ public class Enhems extends JFrame {
 		Set<String> rooms = dataModel.getRooms();
 		roomSelected = new JComboBox<>(rooms.toArray(new String[rooms.size()]));
 		roomSelected.setEnabled(true);
-		dataModel.setSelectedRoom((String)roomSelected.getSelectedItem());
 		DefaultListCellRenderer dlcr = new DefaultListCellRenderer(); 
 		dlcr.setHorizontalAlignment(DefaultListCellRenderer.CENTER); 
 		roomSelected.setRenderer(dlcr);
@@ -186,7 +185,6 @@ public class Enhems extends JFrame {
 			});
 		});
 
-
 		c = new GridBagConstraints();
 		c.insets = new Insets(10, 10, 15, 0);
 		c.weightx = 1;
@@ -216,7 +214,7 @@ public class Enhems extends JFrame {
 		Utilities.putFrameInScreenCenter(this);
 		
 		
-		dataModel.refreshData();
+		dataModel.setSelectedRoom((String)roomSelected.getSelectedItem());
 	}
 	
 

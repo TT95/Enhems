@@ -159,6 +159,7 @@ public class ServerService {
 		try {
 			request.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 			HttpResponse response = httpclient.execute(request);
+
 			int statusCode = response.getStatusLine().getStatusCode();
 			String token = EntityUtils.toString(response.getEntity());
 			if (statusCode == 200) {
@@ -166,6 +167,7 @@ public class ServerService {
 			}
 			request.releaseConnection();
 			return statusCode;
+
 		} catch (IOException ex) {
 			
 			MyLogger.log("Error doing login on the server", ex);

@@ -49,7 +49,7 @@ public class Initializer implements ServletContextListener {
             new File("C:\\pictures").mkdir();
         }
         
-        scheduler.scheduleAtFixedRate(new GraphTask(), 0, 1, TimeUnit.HOURS);
+//        scheduler.scheduleAtFixedRate(new GraphTask(), 0, 1, TimeUnit.HOURS);
         scheduler.scheduleAtFixedRate(new TokenTask(), 0, 1, TimeUnit.DAYS);
     }
     

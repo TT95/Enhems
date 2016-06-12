@@ -66,11 +66,11 @@ public class QueryBuilder {
             switch (atribute) {
                 case "s_setpoint":
                     table = "enhems.slave_setpoint";
-                    whereClause = " WHERE User_ID IN (SELECT User_ID FROM enhems.username_table WHERE Unit_ID=" + roomID + ")";
+                    whereClause = " WHERE Unit_ID = " + roomID;
                     break;
                 case "fan_speed_limit":
                     table = "enhems.fan_speed_limit";
-                    whereClause = " WHERE User_ID IN (SELECT User_ID FROM enhems.username_table WHERE Unit_ID=" + roomID + ")";
+                    whereClause = " WHERE Unit_ID = " + roomID;
                     break;
                 case "Q":
                     table = "enhems.heat_meass";
