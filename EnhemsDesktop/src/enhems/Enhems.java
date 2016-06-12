@@ -1,6 +1,7 @@
 package enhems;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -12,14 +13,17 @@ import java.awt.event.WindowEvent;
 import java.security.Security;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -35,14 +39,14 @@ import enhems.components.GraphPanel;
 import enhems.components.MeasuredUnitPanel;
 
 
-public class Enhems extends JFrame implements DataListener{
+public class Enhems extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private static final String pathToLoadingIcon = "res/icons/loading.gif";
 	private EnhemsDataModel dataModel;
 	private Timer refreshDataModelTimer = new Timer();
 	
-	private JLabel roomSelected;
+	private JComboBox<String> roomSelected;
 	
 	public Enhems() {
 		setTitle("EnhemsApp");
@@ -70,7 +74,15 @@ public class Enhems extends JFrame implements DataListener{
 		LoginProcess.tokenLogin(this, new AbstractAction() {
 			private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e) {
-				mainGUI();
+				ServerService.executeRequest(new ServerRequest() {
+					String[] units = null;
+					public void execute() {
+						units = ServerService.GetAssignedUnits();
+					}
+					public void afterExecution() {
+						mainGUI(units);
+					}
+				});	
 			}
 		});
 	}
@@ -79,13 +91,12 @@ public class Enhems extends JFrame implements DataListener{
 		LoginProcess.createLoginGUI(this);
 	}
 
-	private void mainGUI() {
+	private void mainGUI(String[] units) {
 		
-		dataModel = new EnhemsDataModel();
+		dataModel = new EnhemsDataModel(units);
 		
 		initTimerRefresh(dataModel);
 		
-		dataModel.addListener(this);
 		JPanel centerPanel = new JPanel(new GridLayout(1,0));
 
 		GraphPanel graphPanel = new GraphPanel("Graf", dataModel);
@@ -124,12 +135,20 @@ public class Enhems extends JFrame implements DataListener{
 		c.gridy=3;
 		leftPanel.add(humidityPanel, c);
 
-		roomSelected = new JLabel("---");
-		roomSelected.setEnabled(false);
-//		DefaultListCellRenderer dlcr = new DefaultListCellRenderer(); 
-//		dlcr.setHorizontalAlignment(DefaultListCellRenderer.CENTER); 
-//		roomSelected.setRenderer(dlcr);
-//		roomSelected.setPreferredSize(new Dimension(150, roomSelected.getPreferredSize().height));
+		Set<String> rooms = dataModel.getRooms();
+		roomSelected = new JComboBox<>(rooms.toArray(new String[rooms.size()]));
+		roomSelected.setEnabled(true);
+		dataModel.setSelectedRoom((String)roomSelected.getSelectedItem());
+		DefaultListCellRenderer dlcr = new DefaultListCellRenderer(); 
+		dlcr.setHorizontalAlignment(DefaultListCellRenderer.CENTER); 
+		roomSelected.setRenderer(dlcr);
+		roomSelected.setPreferredSize(new Dimension(150, roomSelected.getPreferredSize().height));
+		roomSelected.addActionListener(e -> {
+			@SuppressWarnings("unchecked")
+			JComboBox<String> roomSelected = (JComboBox<String>) e.getSource();
+			String selected = (String)roomSelected.getSelectedItem();
+			dataModel.setSelectedRoom(selected);
+		});
 		JLabel usernameLabel = new JLabel("Prijavljen: " + Token.getUsername());
 		usernameLabel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		JButton logoutButton = new JButton("Odjava");
@@ -227,14 +246,6 @@ public class Enhems extends JFrame implements DataListener{
 
 	public EnhemsDataModel getDataModel() {
 		return dataModel;
-	}
-
-	@Override
-	public void dataChanged() {
-		if(roomSelected != null) {
-			roomSelected.setText(dataModel.getSelectedRoom());
-		}
-		
 	}
 
 }

@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.SQLDao;
 import dao.models.User;
 
 /**
@@ -43,8 +44,12 @@ public class GraphServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String measure = request.getParameter("measure");
-        String id = request.getParameter("id");
         String timePeriod = request.getParameter("timeperiod");
+        String roomName = request.getParameter("room");
+        String id = SQLDao.getUnit(roomName).getId() + "";
+        if(roomName == null) {
+        	response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        }
         if (!(measure.equals("P") || measure.equals("Ptot") || measure.equals("Idiff") || measure.equals("Idir"))) {//not public data
             User user=(User)request.getSession().getAttribute("user");
             if (user == null) {
@@ -53,8 +58,6 @@ public class GraphServlet extends HttpServlet {
             }
             if (measure.equals("R")) {
                 id = String.valueOf(user.getUserID());
-            } else {
-                id = String.valueOf(user.getRoomID());
             }
         }
         String filename = measure + id + timePeriod + ".png";

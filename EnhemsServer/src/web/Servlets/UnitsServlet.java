@@ -12,6 +12,8 @@ import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,14 +24,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.SQLDao;
+import dao.models.Unit;
 import dao.models.User;
 
 /**
  *
  * @author Stjepan
  */
-@WebServlet(name = "CurrentServlet", urlPatterns = {"/Current"})
-public class CurrentServlet extends HttpServlet {
+@WebServlet(name = "UnitsServlet", urlPatterns = {"/Units"})
+public class UnitsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -45,28 +48,18 @@ public class CurrentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("user");
-        String roomName = request.getParameter("room");
-        if(roomName == null) {
-        	response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
-        String[] currentValues;
-        try {
-            currentValues = GetCurrentValues(roomName);
-        } catch (SQLException ex) {
-            Logger.getLogger(CurrentServlet.class.getName()).log(Level.SEVERE, null, ex);
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            return;
-        }
-        String result = roomName;
-        for (String currentValue : currentValues) {
-            result += "&" + currentValue;
-        }
-        result = URLEncoder.encode(result, "UTF-8");
+//        User user = (User) request.getSession().getAttribute("user");
+//        Set<Unit> rooms = user.getRooms();
+//        String responseString = "";
+//        for (Unit room : rooms) {
+//            responseString += room.getName() + "&";
+//        }
+//        responseString = responseString.substring(0, responseString.length()-1);
+    	String responseString = "C9-06&C9-10";
+        responseString = URLEncoder.encode(responseString, "UTF-8");
         response.setContentType("text/plain");
-        response.setContentLength(result.length());
-        try (InputStream in = new ByteArrayInputStream(result.getBytes(StandardCharsets.UTF_8)); OutputStream out = response.getOutputStream()) {
+        response.setContentLength(responseString.length());
+        try (InputStream in = new ByteArrayInputStream(responseString.getBytes(StandardCharsets.UTF_8)); OutputStream out = response.getOutputStream()) {
             byte[] buf = new byte[1024];
             int count;
             while ((count = in.read(buf)) >= 0) {
@@ -87,16 +80,5 @@ public class CurrentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-    }
-
-    // </editor-fold>
-    /**
-     * @param roomID roomID of the room to get current data values
-     * @return String array of current data values for the given room
-     * @throws SQLException
-     * @throws ClassNotFoundException
-     */
-    private String[] GetCurrentValues(String roomName) throws SQLException {
-        return SQLDao.attributeValues(roomName);
     }
 }

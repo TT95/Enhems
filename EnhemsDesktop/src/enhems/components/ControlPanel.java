@@ -135,10 +135,12 @@ public class ControlPanel extends ElementsCustomPanel implements DataListener {
 				public void execute() {
 					setPointRes = ServerService.Setpoint(
 							String.valueOf(setPointSpinner.getValue()),
-							String.valueOf(setpoint));
+							String.valueOf(setpoint),
+							dataModel.getSelectedRoom());
 					FCspeedRes = ServerService.FCspeed(
 							String.valueOf(FCspeedPanel.getFCspeed()),
-							String.valueOf(FCSpeed));
+							String.valueOf(FCSpeed),
+							dataModel.getSelectedRoom());
 				}
 				public void afterExecution() {
 					

@@ -1,10 +1,15 @@
 package enhems;
 
 import java.awt.Image;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import enhems.components.ImagePanel;
@@ -17,7 +22,7 @@ public class EnhemsDataModel implements DataModel {
 	private  HashMap<String, List<EnhemsGraph>> graphs = new HashMap<>();
 	
 	private String selectedRoom;
-	private List<String> rooms;
+	private Set<String> rooms;
 	private String setPoint;
 	private String FCspeed;
 	private String temperature;
@@ -29,7 +34,8 @@ public class EnhemsDataModel implements DataModel {
 	private String currentMeassUnit;
 	private String currentMeassPeriod;
 	
-	public EnhemsDataModel() {
+	public EnhemsDataModel(String[] units) {
+		rooms = new LinkedHashSet<>(Arrays.asList(units));
 		listeners = new ArrayList<>();
 		currentMeassUnit = GraphCodes.temperature;
 		currentMeassPeriod = GraphCodes.dayInterval;
@@ -40,7 +46,7 @@ public class EnhemsDataModel implements DataModel {
 		ServerService.executeRequest(new ServerRequest() {
 			private String[] data;
 			public void execute() {
-				data = ServerService.GetCurrentValuesData();
+				data = ServerService.GetCurrentValuesData(selectedRoom);
 			}
 			public void afterExecution() {
 				
@@ -94,6 +100,15 @@ public class EnhemsDataModel implements DataModel {
 	 */
 	public  ImagePanel getSelectedGraph() {		
 		
+		if(selectedRoom == null) {
+			try {
+				return new ImagePanel(ImageIO.read(
+						Utilities.class.getResource("res/icons/enhemsBig.png")));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		if(!graphs.containsKey(selectedRoom)) {
 			graphs.put(selectedRoom, new ArrayList<>());
 		}
@@ -124,7 +139,7 @@ public class EnhemsDataModel implements DataModel {
 //				} catch (Exception ignorable) { }
 				
 				String[] data = graphName.split("\\s");
-				tempImage = ServerService.getGraph(data[0], data[1]);
+				tempImage = ServerService.getGraph(data[0], data[1], selectedRoom);
 			}
 			public void afterExecution() {
 				graph.getImagePanel().setImage(tempImage);
@@ -215,5 +230,10 @@ public class EnhemsDataModel implements DataModel {
 			return "---";
 		}
 	}
+
+	public Set<String> getRooms() {
+		return rooms;
+	}
+
 	
 }
