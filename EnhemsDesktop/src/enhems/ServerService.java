@@ -21,6 +21,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import enhems.components.ImagePanel;
+
 public class ServerService {
 	
 	private static String serverRoot = "http://192.168.0.16:8080/AppBE/";
@@ -194,6 +196,12 @@ public class ServerService {
                  if (statusCode == 200) {
                      return ImageIO.read(new ByteArrayInputStream(image));
                  } else if (statusCode == 404) {
+             		try {
+            			return ImageIO.read(
+            					Utilities.class.getResource("res/icons/NoData.png"));
+            		} catch (IOException e) {
+            			e.printStackTrace();
+            		}
                 	 return null;
                  } else {
                 	 Utilities.showErrorDialog("Greška "+statusCode,
