@@ -90,9 +90,11 @@ public class LoginActivity extends Activity {
      */
     private void PostLogin(final String errorMessage) {
         if (errorMessage == null) {
+            String[] units = UnitsAssigned.GetData(getApplicationContext());
             String[] data = CurrentValues.GetData(getApplicationContext());
             Intent i = new Intent(LoginActivity.this, CurrentActivity.class);
             i.putExtra("data", data);
+            i.putExtra("units", units);
             dialog.dismiss();
             startActivity(i);
             finish();
