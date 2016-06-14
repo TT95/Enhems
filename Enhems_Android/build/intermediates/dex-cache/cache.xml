@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\libs\fluent-hc-4.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="965f740251d2ce4efaf34b9ac174b1e6dd3c7c3e">
+        <dex dex="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\build\intermediates\pre-dexed\debug\fluent-hc-4.4-2505a4ad8f16daad91203a4980c4075784f5a545.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\libs\commons-codec-1.9.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="9ce04e34240f674bc72680f8b843b1457383161a">
+        <dex dex="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\build\intermediates\pre-dexed\debug\commons-codec-1.9-50410b95040439252ae7b886553e326d7d4892fc.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\libs\commons-codec-1.9.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="9ce04e34240f674bc72680f8b843b1457383161a">
+        <dex dex="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\build\intermediates\pre-dexed\release\commons-codec-1.9-3cb053753a65cf0204af9c1b7a0ed5908f5ce8f9.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\libs\httpmime-4.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="54646f004d5b4c37a5a75b1d416c59a3075204e2">
+        <dex dex="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\build\intermediates\pre-dexed\debug\httpmime-4.4-7224f451ab87dfa4c78541a89febd8bb70ec5814.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\libs\gral-core-0.10.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d835fef59b055352f6b951a6ddd4d22ee7c040dd">
+        <dex dex="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\build\intermediates\pre-dexed\release\gral-core-0.10-940ae3b7dcd24c037309ac4d730fdaeeeb00bcfd.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\libs\httpclient-4.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6d220441ca681dddc55a189eae81a437309128b8">
+        <dex dex="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\build\intermediates\pre-dexed\release\httpclient-4.4-075d93f93e61c5bc6d79759669977846ee195a1a.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\libs\httpclient-4.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6d220441ca681dddc55a189eae81a437309128b8">
+        <dex dex="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\build\intermediates\pre-dexed\debug\httpclient-4.4-496bfa4b5400a4b2a819da14c294247020e86781.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\libs\httpclient-win-4.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d15bf939c81d6f8f730fc6baf15838e205482c94">
+        <dex dex="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\build\intermediates\pre-dexed\release\httpclient-win-4.4-dc082a547215d7dba9aa5d9cc5f77b64361f4057.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\libs\httpcore-4.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e9b3863fd9c8a273ceed4a7fae10f40bb10a2328">
+        <dex dex="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\build\intermediates\pre-dexed\release\httpcore-4.4-1ca2df224b80a566cc46f63f282f0a467004d66c.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\libs\commons-logging-1.2.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4bfc12adfe4842bf07b657f0369c4cb522955686">
+        <dex dex="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\build\intermediates\pre-dexed\debug\commons-logging-1.2-7d6b798486c602604b95eab49b6ff5f50810bf91.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\libs\gral-core-0.10.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d835fef59b055352f6b951a6ddd4d22ee7c040dd">
+        <dex dex="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\build\intermediates\pre-dexed\debug\gral-core-0.10-ddf3eda1ffa42ec7140d3f5d00d57119716b3438.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\libs\jna-platform-4.1.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="23457ad1cf75c2c16763330de5565a0e67b4bc0a">
+        <dex dex="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\build\intermediates\pre-dexed\release\jna-platform-4.1.0-5bebda0840a2196a15983fd33947b00c63cd8436.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\libs\httpclient-cache-4.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d9e249ad4b19cb8ef7d45e8fe6dda49cdd4aa123">
+        <dex dex="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\build\intermediates\pre-dexed\release\httpclient-cache-4.4-38378b9f802ec3acecea0a55543b8d7279785ddc.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\libs\httpmime-4.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="54646f004d5b4c37a5a75b1d416c59a3075204e2">
+        <dex dex="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\build\intermediates\pre-dexed\release\httpmime-4.4-5e01ea65c4812b7fc24155bee5d6c45171889567.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\libs\commons-logging-1.2.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4bfc12adfe4842bf07b657f0369c4cb522955686">
+        <dex dex="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\build\intermediates\pre-dexed\release\commons-logging-1.2-2ad645f4922bc566936cb0957ab3325c233fce88.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\libs\VectorGraphics2D-0.9.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6d4486b7b9bae1018bade4a1c1015d74696b3632">
+        <dex dex="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\build\intermediates\pre-dexed\release\VectorGraphics2D-0.9.1-2a3ac89cc2b85a04f6ffb6cb0845f79481db1370.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\libs\httpcore-4.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="e9b3863fd9c8a273ceed4a7fae10f40bb10a2328">
+        <dex dex="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\build\intermediates\pre-dexed\debug\httpcore-4.4-627aa98979c0f4960cbae4ebe3b18656a1f799cc.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\libs\fluent-hc-4.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="965f740251d2ce4efaf34b9ac174b1e6dd3c7c3e">
+        <dex dex="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\build\intermediates\pre-dexed\release\fluent-hc-4.4-4c5d53a6f454118d92ac7e9a526d3c37366b2c7c.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\libs\jna-platform-4.1.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="23457ad1cf75c2c16763330de5565a0e67b4bc0a">
+        <dex dex="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\build\intermediates\pre-dexed\debug\jna-platform-4.1.0-934a7764bb5f1308cd220b5ec95336b2a2838e25.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\libs\jna-4.1.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="1c12d070e602efd8021891cdd7fd18bc129372d4">
+        <dex dex="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\build\intermediates\pre-dexed\release\jna-4.1.0-6fa4fcd00e6010254563393a095dc05b570b55db.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\libs\jna-4.1.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="1c12d070e602efd8021891cdd7fd18bc129372d4">
+        <dex dex="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\build\intermediates\pre-dexed\debug\jna-4.1.0-5d4c2b97d674f291c463a38845f339c53a033e97.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\libs\VectorGraphics2D-0.9.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6d4486b7b9bae1018bade4a1c1015d74696b3632">
+        <dex dex="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\build\intermediates\pre-dexed\debug\VectorGraphics2D-0.9.1-a56a086f72eed255a06298e432756de8ca6184da.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\libs\httpclient-cache-4.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d9e249ad4b19cb8ef7d45e8fe6dda49cdd4aa123">
+        <dex dex="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\build\intermediates\pre-dexed\debug\httpclient-cache-4.4-ef537b42663b789d23881cc7d21791733ac4c554.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3.1\ecb6e1f8e4b0e84c4b886c2f14a1500caf309757\gson-2.3.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="C:\Users\TeoToplak\AndroidStudioProjects\Enhems_Android\app\build\intermediates\pre-dexed\release\gson-2.3.1-53b59d546f1d0487618ebf8e494d0810ee08a1ac.jar" />
+    </item>
+    <item
+        jar="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\libs\httpclient-win-4.4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d15bf939c81d6f8f730fc6baf15838e205482c94">
+        <dex dex="C:\Users\TeoToplak\workspace\Enhems\Enhems_Android\app\build\intermediates\pre-dexed\debug\httpclient-win-4.4-a2ce8b252798935781658acb6f512938a0478a94.jar" />
+    </item>
+
+</items>

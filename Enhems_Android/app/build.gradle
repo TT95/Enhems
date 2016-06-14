@@ -1,0 +1,43 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    defaultConfig {
+        applicationId "ENHEMS.enhems"
+        minSdkVersion 11
+        targetSdkVersion 11
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile files('libs/commons-codec-1.9.jar')
+    compile files('libs/commons-logging-1.2.jar')
+    compile files('libs/fluent-hc-4.4.jar')
+    compile files('libs/gral-core-0.10.jar')
+    compile files('libs/httpclient-4.4.jar')
+    compile files('libs/httpclient-cache-4.4.jar')
+    compile files('libs/httpclient-win-4.4.jar')
+    compile files('libs/httpcore-4.4.jar')
+    compile files('libs/httpmime-4.4.jar')
+    compile files('libs/jna-4.1.0.jar')
+    compile files('libs/jna-platform-4.1.0.jar')
+    compile files('libs/VectorGraphics2D-0.9.1.jar')
+}

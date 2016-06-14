@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools" tools:context=".ControlActivity">
+    <item android:id="@+id/action_set_control" android:title="Promjeni"
+          android:orderInCategory="100"  android:showAsAction="ifRoom"/>
+</menu>
+<!-- From: file:/C:/Users/TeoToplak/workspace/Enhems/Enhems_Android/app/src/main/res/layout/menu_control.xml -->
