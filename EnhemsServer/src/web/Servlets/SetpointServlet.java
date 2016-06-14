@@ -55,9 +55,10 @@ public class SetpointServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         User user=(User)request.getSession().getAttribute("user");
+        String unitName = request.getParameter("room");
         try {
         	Integer setpoint = Integer.valueOf(request.getParameter("setpoint"));
-            SQLDao.setSetpoint(user.getUserID(), setpoint);
+            SQLDao.setSetpoint(user.getUserID(), setpoint, unitName);
             response.setStatus(HttpServletResponse.SC_OK);
         }  catch (SQLException ex) {
             Logger.getLogger(SetpointServlet.class.getName()).log(Level.SEVERE, null, ex);

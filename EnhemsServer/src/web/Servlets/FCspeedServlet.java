@@ -55,9 +55,10 @@ public class FCspeedServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         User user=(User)request.getSession().getAttribute("user");
+        String unitName = request.getParameter("room");
         try {
         	int fcspeed = Integer.valueOf(request.getParameter("fcspeed"));
-            SQLDao.setFCspeed(user.getUserID(), fcspeed);
+            SQLDao.setFCspeed(user.getUserID(), fcspeed, unitName);
             response.setStatus(HttpServletResponse.SC_OK);
         } catch (SQLException ex) {
             Logger.getLogger(SetpointServlet.class.getName()).log(Level.SEVERE, null, ex);

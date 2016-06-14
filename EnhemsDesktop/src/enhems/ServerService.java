@@ -21,6 +21,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import enhems.components.ImagePanel;
+
 public class ServerService {
 	
 	private static String serverRoot = "http://192.168.0.16:8080/AppBE/";
@@ -38,12 +40,13 @@ public class ServerService {
 		}).start();
 	}
 	
-    public static String FCspeed(String fcspeed, final String preFCspeed) {
+    public static String FCspeed(String fcspeed, final String preFCspeed, String room) {
         HttpClient httpclient = AppHttpClient.GetInstance();
         HttpPost request = new HttpPost(serverRoot + "FCspeed");
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("fcspeed", fcspeed));
         params.add(new BasicNameValuePair("token", Token.getToken()));
+        params.add(new BasicNameValuePair("room", room));
         try {
             request.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
             HttpResponse response = httpclient.execute(request);
@@ -60,12 +63,13 @@ public class ServerService {
         return preFCspeed;
     }
     
-    public static String Setpoint(String setpoint, final String preSetPoint) {
+    public static String Setpoint(String setpoint, final String preSetPoint, String room) {
         HttpClient httpclient = AppHttpClient.GetInstance();
         HttpPost request = new HttpPost(serverRoot + "Setpoint");
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("setpoint", setpoint));
         params.add(new BasicNameValuePair("token", Token.getToken()));
+        params.add(new BasicNameValuePair("room", room));
         try {
             request.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
             HttpResponse response = httpclient.execute(request);
@@ -88,9 +92,10 @@ public class ServerService {
      * @param context application context
      * @return String array of current room data
      */
-    public static String[] GetCurrentValuesData() {
+    public static String[] GetCurrentValuesData(String room) {
         HttpClient httpclient = AppHttpClient.GetInstance();
-        HttpGet request = new HttpGet(serverRoot + "Current?token="+Token.getToken());
+        
+        HttpGet request = new HttpGet(serverRoot + "Current?token="+Token.getToken()+ "&room="+room);
         try {
             HttpResponse response = httpclient.execute(request);
             int statusCode = response.getStatusLine().getStatusCode();
@@ -105,6 +110,29 @@ public class ServerService {
         }
     	request.releaseConnection();
         return new String[]{"---", "---", "---", "---", "---", "---", "---", "---"};
+    }
+    
+    /**
+     * 
+     * @return All unti names avaliable to user in String array
+     */
+    public static String[] GetAssignedUnits() {
+        HttpClient httpclient = AppHttpClient.GetInstance();
+        HttpGet request = new HttpGet(serverRoot + "Units?token="+Token.getToken());
+        try {
+            HttpResponse response = httpclient.execute(request);
+            int statusCode = response.getStatusLine().getStatusCode();
+            String data = URLDecoder.decode(EntityUtils.toString(response.getEntity(),
+            		Charset.defaultCharset().name()), "UTF-8");
+            if (statusCode == 200) {
+            	request.releaseConnection();
+                return data.split("&");
+            }
+        } catch (IOException ex) {
+        	MyLogger.log("Error getting current values from server", ex);
+        }
+    	request.releaseConnection();
+        return null;
     }
     
 	/**
@@ -131,6 +159,7 @@ public class ServerService {
 		try {
 			request.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 			HttpResponse response = httpclient.execute(request);
+
 			int statusCode = response.getStatusLine().getStatusCode();
 			String token = EntityUtils.toString(response.getEntity());
 			if (statusCode == 200) {
@@ -138,6 +167,7 @@ public class ServerService {
 			}
 			request.releaseConnection();
 			return statusCode;
+
 		} catch (IOException ex) {
 			
 			MyLogger.log("Error doing login on the server", ex);
@@ -154,9 +184,11 @@ public class ServerService {
      * @param measure measure for which to get graphs
      * @return error message or null if no error
      */
-    public static Image getGraph(String measure, String timePeriod) {
+    public static Image getGraph(String measure, String timePeriod, String roomName) {
+    	
         	HttpGet request = new HttpGet(serverRoot + "Graph?measure=" +
-        			measure + "&timeperiod=" + timePeriod + "&token=" + Token.getToken());
+        			measure + "&timeperiod=" + timePeriod + "&token=" + Token.getToken()
+        			+ "&room="+roomName);
         	HttpClient httpclient = AppHttpClient.GetInstance();
         	 try {
                  HttpResponse response = httpclient.execute(request);
@@ -166,7 +198,12 @@ public class ServerService {
                  if (statusCode == 200) {
                      return ImageIO.read(new ByteArrayInputStream(image));
                  } else if (statusCode == 404) {
-                	 Utilities.showErrorDialog("Info", "Nema podataka za prikazati", null, null);
+             		try {
+            			return ImageIO.read(
+            					Utilities.class.getResource("res/icons/NoData.png"));
+            		} catch (IOException e) {
+            			e.printStackTrace();
+            		}
                 	 return null;
                  } else {
                 	 Utilities.showErrorDialog("Greška "+statusCode,

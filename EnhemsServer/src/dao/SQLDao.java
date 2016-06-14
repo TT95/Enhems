@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import dao.models.Unit;
 import dao.models.User;
@@ -44,22 +46,21 @@ public class SQLDao {
 		}
 		return units;
 	}
+	
+	
+	public static Unit getUnit(String name) {
 
-	public static User getUser(int id) {
-
-		User user=null;
+		Unit unit = new Unit();
 		Connection con = SQLConnectionProvider.getConnection();
 		PreparedStatement pst = null;
 		try {
-			pst = con.prepareStatement("SELECT * FROM enhems.username_table JOIN enhems.unit_names "
-					+ "ON enhems.username_table.Unit_ID=enhems.unit_names.Unit_ID WHERE User_ID=" + id + ";");
+			pst = con.prepareStatement("SELECT * FROM enhems.unit_names WHERE Unit_Name='"+name+"'");
 			try {
 				ResultSet rs = pst.executeQuery();
 				try {
 					while(rs!=null && rs.next()) {
-						user = new User(rs.getString("Username"), rs.getInt("User_ID"),
-								rs.getInt("Unit_ID"), rs.getString("Unit_Name"));
-
+						unit.setId(rs.getInt(1));
+						unit.setName(rs.getString(2));
 					}
 				} finally {
 					try { rs.close(); } catch(Exception ignorable) {}
@@ -70,19 +71,51 @@ public class SQLDao {
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		return user;
+		return unit;
+	}
+
+	public static User getUser(int id) {
+
+		String username=null;
+		Set<Unit> units = new LinkedHashSet<>();
+		
+		Connection con = SQLConnectionProvider.getConnection();
+		PreparedStatement pst = null;
+		try {
+			pst = con.prepareStatement("SELECT * FROM enhems.username_table2 JOIN enhems.unit_names "
+					+ "ON enhems.username_table2.Unit_ID=enhems.unit_names.Unit_ID WHERE User_ID=" + id + ";");
+			try {
+				ResultSet rs = pst.executeQuery();
+				try {
+					while(rs!=null && rs.next()) {
+						username = rs.getString("Username");
+						Unit unit = new Unit(rs.getInt("Unit_ID"), rs.getString("Unit_Name"));
+						units.add(unit);
+					}
+				} finally {
+					try { rs.close(); } catch(Exception ignorable) {}
+				}
+			} finally {
+				try { pst.close(); } catch(Exception ignorable) {}
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return new User(username, id, units);
 	}
 	
 	
 	public static User getUser(String username) {
 
-		User user=null;
+		Integer id = null;
+		Set<Unit> units = new LinkedHashSet<>();
+		
 		Connection con = SQLConnectionProvider.getConnection();
 
 		PreparedStatement pst = null;
 		try {
-			pst = con.prepareStatement("SELECT * FROM enhems.username_table JOIN enhems.unit_names "
-					+ "ON enhems.username_table.Unit_ID=enhems.unit_names.Unit_ID "
+			pst = con.prepareStatement("SELECT * FROM enhems.username_table2 JOIN enhems.unit_names "
+					+ "ON enhems.username_table2.Unit_ID=enhems.unit_names.Unit_ID "
 					+ "WHERE trim(TRAILING char(13) FROM Username) LIKE '" + username + "';");
 			try {
 
@@ -90,8 +123,8 @@ public class SQLDao {
 
 				try {
 					while(rs!=null && rs.next()) {
-						user = new User(username, rs.getInt(3), rs.getInt(1), rs.getString(5));
-
+						id = rs.getInt("User_ID");
+						units.add(new Unit(rs.getInt("Unit_ID"), rs.getString("Unit_Name")));
 					}
 				} finally {
 					try { rs.close(); } catch(Exception ignorable) {}
@@ -102,7 +135,7 @@ public class SQLDao {
 		} catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		return user;
+		return new User(username, id, units);
 	}
 	
 	public static Map<Integer, Double> UnitQuery(String sqlStatement, Timestamp current) {
@@ -181,13 +214,14 @@ public class SQLDao {
 		}
 	}
 	
-	public static void setSetpoint(int userId, int setpoint) throws SQLException {
+	public static void setSetpoint(int userId, int setpoint, String unitName) throws SQLException {
 
+		Unit unit = SQLDao.getUnit(unitName);
 		Connection con = SQLConnectionProvider.getConnection();
 		PreparedStatement pst = null;
 		try {
-			pst = con.prepareStatement("INSERT INTO enhems.slave_setpoint (User_ID,s_setpoint) VALUES ("
-		+ userId + "," + setpoint + ");");
+			pst = con.prepareStatement("INSERT INTO enhems.slave_setpoint (User_ID,s_setpoint,Unit_ID) VALUES ("
+		+ userId + "," + setpoint + "," + unit.getId() + ");");
 			try {
 				
 				pst.executeUpdate();
@@ -200,12 +234,34 @@ public class SQLDao {
 		}
 	}
 	
-	public static String[] attributeValues(int roomID) {
+	public static void setFCspeed(int userId, int fcspeed, String unitName) throws SQLException {
+
+		Unit unit = SQLDao.getUnit(unitName);
+		Connection con = SQLConnectionProvider.getConnection();
+		PreparedStatement pst = null;
+		try {
+			pst = con.prepareStatement("INSERT INTO enhems.fan_speed_limit (User_ID,fan_speed_limit,Unit_ID)"
+            		+ " VALUES (" + userId + "," + fcspeed + "," + unit.getId() + ");");
+			try {
+				
+				pst.executeUpdate();
+
+			} finally {
+				try { pst.close(); } catch(Exception ignorable ) { }
+			}
+		} catch(SQLException ex) {
+			throw ex;
+		}
+	}
+	
+	public static String[] attributeValues(String roomName) {
 		
 		String[] attributes = new String[]{"Tqax", "Hzgb", "CO2zgb", "s_setpoint", "Op_mode", "Q", "fan_speed_limit"};
         String[] currentValues = new String[attributes.length];
+        Unit unit = SQLDao.getUnit(roomName);
+        
         int i = 0;
-        String[] queries = QueryBuilder.BuildQueries(roomID, attributes);
+        String[] queries = QueryBuilder.BuildQueries(unit.getId(), attributes);
         
         Connection con = SQLConnectionProvider.getConnection();
 		PreparedStatement pst = null;
@@ -281,23 +337,5 @@ public class SQLDao {
         return currentValues;
 	}
 	
-	public static void setFCspeed(int userId, int fcspeed) throws SQLException {
-
-		Connection con = SQLConnectionProvider.getConnection();
-		PreparedStatement pst = null;
-		try {
-			pst = con.prepareStatement("INSERT INTO enhems.fan_speed_limit (User_ID,fan_speed_limit)"
-            		+ " VALUES (" + userId + "," + fcspeed + ");");
-			try {
-				
-				pst.executeUpdate();
-
-			} finally {
-				try { pst.close(); } catch(Exception ignorable ) { }
-			}
-		} catch(SQLException ex) {
-			throw ex;
-		}
-	}
 	
 }

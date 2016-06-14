@@ -46,15 +46,20 @@ public class CurrentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("user");
+        String roomName = request.getParameter("room");
+        if(roomName == null) {
+        	response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
         String[] currentValues;
         try {
-            currentValues = GetCurrentValues(user.getRoomID());
+            currentValues = GetCurrentValues(roomName);
         } catch (SQLException ex) {
             Logger.getLogger(CurrentServlet.class.getName()).log(Level.SEVERE, null, ex);
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return;
         }
-        String result = user.getRoomName();
+        String result = roomName;
         for (String currentValue : currentValues) {
             result += "&" + currentValue;
         }
@@ -91,7 +96,7 @@ public class CurrentServlet extends HttpServlet {
      * @throws SQLException
      * @throws ClassNotFoundException
      */
-    private String[] GetCurrentValues(int roomID) throws SQLException {
-        return SQLDao.attributeValues(roomID);
+    private String[] GetCurrentValues(String roomName) throws SQLException {
+        return SQLDao.attributeValues(roomName);
     }
 }
