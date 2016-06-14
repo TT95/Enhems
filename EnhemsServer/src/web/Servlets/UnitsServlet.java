@@ -48,14 +48,13 @@ public class UnitsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        User user = (User) request.getSession().getAttribute("user");
-//        Set<Unit> rooms = user.getRooms();
-//        String responseString = "";
-//        for (Unit room : rooms) {
-//            responseString += room.getName() + "&";
-//        }
-//        responseString = responseString.substring(0, responseString.length()-1);
-    	String responseString = "C9-06&C9-10";
+        User user = (User) request.getSession().getAttribute("user");
+        Set<Unit> rooms = user.getRooms();
+        String responseString = "";
+        for (Unit room : rooms) {
+            responseString += room.getName() + "&";
+        }
+        responseString = responseString.substring(0, responseString.length()-1);
         responseString = URLEncoder.encode(responseString, "UTF-8");
         response.setContentType("text/plain");
         response.setContentLength(responseString.length());

@@ -76,7 +76,7 @@ public class ControlPanel extends ElementsCustomPanel implements DataListener {
     		} catch (Exception e) {
     			Utilities.showErrorDialog("Info", "Vrijednosti se postavljaju prvi puta: \n "
     					+ "predocene su uobicajene postavke koje trenutno ne vrijede \n"
-    					+ "(setpoint: "+defaultSetpoint+"°C, brzina ventilatora:"+defaultFCspeed+" )", this, e);
+    					+ "(setpoint: "+defaultSetpoint+"°C, brzina ventilatora: "+defaultFCspeed+" )", this, e);
     			showChangeDialog(defaultSetpoint,defaultFCspeed); 
     		}
     		});
