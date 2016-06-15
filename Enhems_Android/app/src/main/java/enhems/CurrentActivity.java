@@ -410,7 +410,6 @@ public class CurrentActivity extends Activity {
 
         });
 
-        Async.StartWithDialog("Molimo pričekajte", new RefreshThread(), dialog);
 
         onResumeFlag = false;
     }
