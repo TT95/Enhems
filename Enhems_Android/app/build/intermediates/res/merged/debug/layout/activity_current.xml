@@ -19,7 +19,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/temp_hr"
             android:id="@+id/tempTitle"
-            android:textSize="40sp"
+            android:textSize="32sp"
         />
 
         <TextView
@@ -139,7 +139,21 @@
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/roomSelection" />
+        android:id="@+id/roomSelection"
+        android:layout_toRightOf="@+id/textView"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Room: "
+        android:id="@+id/textView"
+        android:gravity="center"
+        android:textSize="36sp"
+        android:layout_alignBottom="@+id/roomSelection"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/roomSelection" />
 
 </RelativeLayout>
 <!-- From: file:/C:/Users/TeoToplak/workspace/Enhems/Enhems_Android/app/src/main/res/layout/activity_current.xml -->

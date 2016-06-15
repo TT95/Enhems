@@ -108,7 +108,8 @@ public class CurrentActivity extends Activity {
     private String GetHistory(String measure) {
         String[] timePeriods = new String[]{"L24", "LW"};
         for (String timePeriod : timePeriods) {
-            HttpGet request = new HttpGet(getString(R.string.root) + "Graph?measure=" + measure + "&timeperiod=" + timePeriod + "&token=" + Token.get(this));
+            HttpGet request = new HttpGet(getString(R.string.root) + "Graph?measure=" + measure + "&timeperiod="
+                    + timePeriod + "&token=" + Token.get(this) + "&room=" + roomSelection.getSelectedItem().toString());
             String errorMessage = HttpGraph.Get(request, timePeriod, getApplicationContext());
             if (errorMessage != null) {
                 return errorMessage;
@@ -369,7 +370,6 @@ public class CurrentActivity extends Activity {
         String[] units = i.getStringArrayExtra("units");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, units);
         roomSelection.setAdapter(adapter);
-        Async.StartWithDialog("Molimo pričekajte", new RefreshThread(), dialog);
         setTitle("ENHEMS");
 
         //set listeners
@@ -409,6 +409,8 @@ public class CurrentActivity extends Activity {
             }
 
         });
+
+        Async.StartWithDialog("Molimo pričekajte", new RefreshThread(), dialog);
 
         onResumeFlag = false;
     }

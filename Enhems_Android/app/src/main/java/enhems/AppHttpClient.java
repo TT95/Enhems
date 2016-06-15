@@ -86,7 +86,7 @@ public class AppHttpClient extends DefaultHttpClient {
             // for the verification of the server certificate.
             SSLSocketFactory sf = new SSLSocketFactory(trusted);
             // Hostname verification from certificate
-            sf.setHostnameVerifier(SSLSocketFactory.STRICT_HOSTNAME_VERIFIER);
+            sf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
             return sf;
         } catch (KeyStoreException ex) {
             Logger.getLogger(LoginActivity.class.getName()).log(Level.SEVERE, null, ex);
