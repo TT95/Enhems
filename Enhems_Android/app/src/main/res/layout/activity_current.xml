@@ -7,11 +7,12 @@
                 android:id="@+id/currentLayout">
 
     <RelativeLayout
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/dataLayout">
-    
+        android:id="@+id/dataLayout"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -134,5 +135,10 @@
         android:text="@string/controlButton"
         android:layout_alignParentBottom="true"
     />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/roomSelection" />
 
 </RelativeLayout>

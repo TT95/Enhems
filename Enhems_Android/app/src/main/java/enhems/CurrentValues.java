@@ -26,9 +26,10 @@ public class CurrentValues {
          * @param context application context
          * @return String array of current room data
          */
-        public static String[] GetData(Context context) {
+        public static String[] GetData(Context context, String unit) {
             HttpClient httpclient = AppHttpClient.GetInstance(context);
-            HttpGet request = new HttpGet(context.getString(R.string.root) + "Current?token="+Token.get(context));
+            HttpGet request = new HttpGet(context.getString(R.string.root) + "Current?token="+Token.get(context)
+            + "&room="+unit);
             try {
                 HttpResponse response = httpclient.execute(request);
                 int statusCode = response.getStatusLine().getStatusCode();

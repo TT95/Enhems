@@ -18,11 +18,11 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_change=0x7f080020;
-        public static final int action_logout=0x7f08001f;
-        public static final int action_refresh=0x7f08001e;
-        public static final int action_set_control=0x7f08001d;
-        public static final int cancel_button=0x7f08001b;
+        public static final int action_change=0x7f080021;
+        public static final int action_logout=0x7f080020;
+        public static final int action_refresh=0x7f08001f;
+        public static final int action_set_control=0x7f08001e;
+        public static final int cancel_button=0x7f08001c;
         public static final int co2Title=0x7f08000b;
         public static final int co2_text=0x7f08000c;
         public static final int controlLayout=0x7f080000;
@@ -30,27 +30,28 @@ public final class R {
         public static final int control_graph=0x7f080001;
         public static final int currentLayout=0x7f080002;
         public static final int dataLayout=0x7f080003;
-        public static final int from_picker=0x7f080018;
-        public static final int historyLayout=0x7f08000f;
-        public static final int history_graph=0x7f080010;
+        public static final int from_picker=0x7f080019;
+        public static final int historyLayout=0x7f080010;
+        public static final int history_graph=0x7f080011;
         public static final int humTitle=0x7f080009;
         public static final int hum_text=0x7f08000a;
-        public static final int loginLayout=0x7f080011;
-        public static final int login_button=0x7f080015;
-        public static final int numPicker=0x7f08001c;
-        public static final int password=0x7f080014;
-        public static final int passwordTitle=0x7f080013;
-        public static final int set_button=0x7f08001a;
+        public static final int loginLayout=0x7f080012;
+        public static final int login_button=0x7f080016;
+        public static final int numPicker=0x7f08001d;
+        public static final int password=0x7f080015;
+        public static final int passwordTitle=0x7f080014;
+        public static final int roomSelection=0x7f08000f;
+        public static final int set_button=0x7f08001b;
         public static final int systemStatus_text=0x7f08000d;
         public static final int tempCurTitle=0x7f080005;
         public static final int tempCur_text=0x7f080007;
         public static final int tempSetTitle=0x7f080006;
         public static final int tempSet_text=0x7f080008;
         public static final int tempTitle=0x7f080004;
-        public static final int to_picker=0x7f080017;
-        public static final int userNameTitle=0x7f080016;
-        public static final int user_name=0x7f080012;
-        public static final int value_picker=0x7f080019;
+        public static final int to_picker=0x7f080018;
+        public static final int userNameTitle=0x7f080017;
+        public static final int user_name=0x7f080013;
+        public static final int value_picker=0x7f08001a;
     }
     public static final class layout {
         public static final int activity_control=0x7f030000;

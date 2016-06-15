@@ -16,8 +16,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.NumberPicker;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.IOException;
@@ -39,6 +42,7 @@ import org.apache.http.message.BasicNameValuePair;
  */
 public class CurrentActivity extends Activity {
 
+    Spinner roomSelection;
     private TextView mTemp;
     private TextView mHum;
     private TextView mCO2;
@@ -47,7 +51,7 @@ public class CurrentActivity extends Activity {
     private Button mControl;
     private ProgressDialog dialog;
     private boolean onResumeFlag;
-    private String title;
+    private String[] rooms;
 
     /**
      * Set data to text views
@@ -119,7 +123,8 @@ public class CurrentActivity extends Activity {
      * @return error message or null if no error
      */
     private String GetControl() {
-        HttpGet request = new HttpGet(getString(R.string.root) + "Control?token=" + Token.get(this));
+        HttpGet request = new HttpGet(getString(R.string.root) + "Control?token=" + Token.get(this)
+        +"&room="+roomSelection.getSelectedItem().toString());
         return HttpGraph.Get(request, "Control", getApplicationContext());
     }
 
@@ -159,6 +164,7 @@ public class CurrentActivity extends Activity {
         List<NameValuePair> params = new ArrayList();
         params.add(new BasicNameValuePair("setpoint", setpoint));
         params.add(new BasicNameValuePair("token", Token.get(this)));
+        params.add(new BasicNameValuePair("room", roomSelection.getSelectedItem().toString()));
         try {
             request.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
             HttpResponse response = httpclient.execute(request);
@@ -179,7 +185,7 @@ public class CurrentActivity extends Activity {
 
         @Override
         public void run() {
-            PostRefresh(CurrentValues.GetData(getApplicationContext()));
+            PostRefresh(CurrentValues.GetData(getApplicationContext(),roomSelection.getSelectedItem().toString()));
         }
     }
 
@@ -261,7 +267,7 @@ public class CurrentActivity extends Activity {
         dialog.dismiss();
         if (errorMessage == null) {
             Intent i = new Intent(CurrentActivity.this, cls);
-            i.putExtra("title", title);
+            i.putExtra("title", roomSelection.getSelectedItem().toString());
             startActivity(i);
         } else {
             runOnUiThread(new Runnable() {
@@ -356,13 +362,15 @@ public class CurrentActivity extends Activity {
         mHum = (TextView) findViewById(R.id.hum_text);
         mCO2 = (TextView) findViewById(R.id.co2_text);
         mSetTemp = (TextView) findViewById(R.id.tempSet_text);
+        roomSelection = (Spinner) findViewById(R.id.roomSelection);
         mControl = (Button) findViewById(R.id.control_button);
         mSystemStatus = (TextView) findViewById(R.id.systemStatus_text);
         Intent i = getIntent();
-        String[] data = i.getStringArrayExtra("data");
-        title = data[0].toUpperCase();
-        setTitle(title);
-        SetData(data);
+        String[] units = i.getStringArrayExtra("units");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, units);
+        roomSelection.setAdapter(adapter);
+        Async.StartWithDialog("Molimo pričekajte", new RefreshThread(), dialog);
+        setTitle("ENHEMS");
 
         //set listeners
         mTemp.setOnClickListener(new View.OnClickListener() {
@@ -388,6 +396,18 @@ public class CurrentActivity extends Activity {
             public void onClick(View v) {
                 Async.StartWithDialog("Molimo pričekajte", new GetGraphThread(null), dialog);
             }
+        });
+        roomSelection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                Async.StartWithDialog("Molimo pričekajte", new RefreshThread(), dialog);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
         });
 
         onResumeFlag = false;
