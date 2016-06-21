@@ -27,7 +27,6 @@ public class GraphPanel extends JPanel implements DataListener{
 	private static final long serialVersionUID = 1L;
 	private static final int width = 640;
 	private static final int height = 360;
-	private static String currentValuePrefix = "Trenutna vrijednost = ";
 	private static String currentDatePrefix = "Datum zadnjeg mjerenja: ";
 	private JLabel currentMeass;
 	private ImagePanel imagePanel;
@@ -57,7 +56,7 @@ public class GraphPanel extends JPanel implements DataListener{
 		day = new JButton("24 sata");
 		week = new JButton("tjedan");
 		JPanel upperPanel = new JPanel(new GridBagLayout());
-		currentMeass = new JLabel(currentValuePrefix+"---");
+		currentMeass = new JLabel(valuesRepresentation("---", "---"));
 		dateLabel = new JLabel();
 		refreshDate(); //setting date
 		upperPanel.setBorder(BorderFactory.createEmptyBorder());
@@ -100,11 +99,6 @@ public class GraphPanel extends JPanel implements DataListener{
 		});
 	}
 	
-	public void setCurrentValue(String text) {
-		currentMeass.setText(currentValuePrefix+text);
-	}
-	
-	
 	private void setImagePanel(ImagePanel imagePanel) {
 		graph.remove(this.imagePanel);
 		this.imagePanel=imagePanel;
@@ -122,8 +116,13 @@ public class GraphPanel extends JPanel implements DataListener{
 	@Override
 	public void dataChanged() {
 		setImagePanel(dataModel.getSelectedGraph());
-		currentMeass.setText(currentValuePrefix+dataModel.getCurrentMeass());
+		currentMeass.setText(valuesRepresentation(dataModel.getTemperature(),
+				dataModel.getMedium()));
 		refreshDate();
+	}
+	
+	private String valuesRepresentation(String temperature, String medium) {
+		return "Soba = " + temperature + " (Medij = " + medium + " )";
 	}
 	
 }

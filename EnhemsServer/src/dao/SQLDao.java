@@ -256,7 +256,8 @@ public class SQLDao {
 	
 	public static String[] attributeValues(String roomName) {
 		
-		String[] attributes = new String[]{"Tqax", "Hzgb", "CO2zgb", "s_setpoint", "Op_mode", "Q", "fan_speed_limit"};
+		String[] attributes = new String[]{"Tqax", "Hzgb", "CO2zgb", "s_setpoint",
+				"Op_mode", "Q", "fan_speed_limit", "Tf"};
         String[] currentValues = new String[attributes.length];
         Unit unit = SQLDao.getUnit(roomName);
         
@@ -314,11 +315,19 @@ public class SQLDao {
     	                            case 6:
     	                                currentValues[i++] = String.valueOf(currentValue.getInt(1));
     	                                break;
+    	                            case 7:
+    	                                currentValues[i++] = String.valueOf(currentValue.getInt(1)) + "°C";
+    	                                break;
     	                        }
     	                    } else {
+    	                    	//this was made because there is possibility there is no row in 
+    	                    	//database for this attribute
+    	                    	//whole method should remodeled! bad coding
     	                    	if(attributes[i].equals("fan_speed_limit")) {
     	                    		 currentValues[i++] = "0";
-    	                    	} else {
+    	                    	}
+    	                    	// if there is no attribute for specific unit "---" will be sent
+    	                    	else {
     	                    		currentValues[i++] = "---";
     	                    	}
     	                }

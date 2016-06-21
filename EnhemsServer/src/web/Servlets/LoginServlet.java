@@ -14,8 +14,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,6 +28,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.log4j.Logger;
 
 import dao.SQLDao;
 import dao.models.User;
@@ -44,6 +43,7 @@ import web.Model.TokenRep;
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	final static Logger logger = Logger.getLogger(LoginServlet.class);
 
 	/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -80,7 +80,9 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("user");
         Token token;
+        logger.info("Into login");
         if (user == null) {
+        	logger.info("No token given");
             String userName = request.getParameter("username");
             String pass = request.getParameter("pass");
             if (userName == null || pass == null) {
@@ -88,9 +90,11 @@ public class LoginServlet extends HttpServlet {
                 return;
             }
             try {
+            	logger.info("Going to login method");
                 user = doLogin(userName, pass);
+                logger.info("Out of login method");
             } catch (SQLException ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            	logger.fatal("SQl exception while user login");
                 user = null;
             }
             if (user == null) {
@@ -102,6 +106,7 @@ public class LoginServlet extends HttpServlet {
             TokenRep.Add(token);
         }
         else{
+        	logger.info("Token given sending it back");
             token=TokenRep.Find(request.getParameter("token"));
         }
         response.setContentType("text/plain");
@@ -126,12 +131,14 @@ public class LoginServlet extends HttpServlet {
         params.add(new BasicNameValuePair("loginpassw", password));
         postRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 
+        logger.info("Sending to ferweb");
         HttpResponse postResponse = httpclient.execute(postRequest);
+        logger.info("Getting back from ferweb");
         String location = postResponse.getHeaders("Location")[0].getValue();
         if (location.contains("loginfailed")) {// FERweb login failed           
             return null;
         }
-
+        
         return SQLDao.getUser(username);
     }
 }

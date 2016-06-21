@@ -2,6 +2,7 @@
     <wb-module deploy-name="EnhemsServer">
         <wb-resource deploy-path="/" source-path="/web/enhems" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/resource"/>
         <property name="context-root" value="EnhemsServer"/>
         <property name="java-output-path" value="/EnhemsServer/web/enhems/WEB-INF/classes"/>
     </wb-module>

@@ -64,6 +64,10 @@ public class QueryBuilder {
         int i = 0;
         for (String atribute : atributes) {
             switch (atribute) {
+            	case "Tf":
+                table = "enhems.heat_meass";
+                whereClause = " WHERE Unit_ID = " + roomID;
+                break;
                 case "s_setpoint":
                     table = "enhems.slave_setpoint";
                     whereClause = " WHERE Unit_ID = " + roomID;

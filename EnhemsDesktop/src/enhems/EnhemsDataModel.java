@@ -28,6 +28,7 @@ public class EnhemsDataModel implements DataModel {
 	private String temperature;
 	private String co2;
 	private String humidity;
+	private String medium;
 	private boolean opMode;
 	private boolean systemOn;
 	
@@ -61,6 +62,7 @@ public class EnhemsDataModel implements DataModel {
 		        temperature = data[1];
 		        humidity = data[2];
 		        co2 = data[3];
+		        medium = data[7];
 		        
 		        if (opMode) {
 		        	setPoint = data[4];
@@ -233,5 +235,8 @@ public class EnhemsDataModel implements DataModel {
 		return rooms;
 	}
 
-	
+	public String getMedium() {
+		return medium;
+	}
+
 }
