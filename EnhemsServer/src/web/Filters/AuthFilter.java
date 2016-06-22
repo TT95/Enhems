@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
+import org.apache.log4j.Logger;
+
 import dao.models.User;
 import web.Model.TokenRep;
 
@@ -31,6 +33,7 @@ import web.Model.TokenRep;
 public class AuthFilter implements Filter {
 
     private static final boolean debug = false;
+    Logger logger = Logger.getLogger(AuthFilter.class);
 
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
@@ -54,6 +57,8 @@ public class AuthFilter implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
 
+    	logger.info("Into auth filter");
+    	
         HttpServletRequest myRequest = (HttpServletRequest) request;
         HttpServletResponse myResponse = (HttpServletResponse) response;
 

@@ -13,13 +13,12 @@ import java.util.Enumeration;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.apache.http.client.utils.DateUtils;
+import org.apache.log4j.Logger;
 
 import com.mysql.jdbc.AbandonedConnectionCleanupThread;
 
@@ -27,10 +26,12 @@ import dao.EnhemsDB;
 import dao.SQLConnectionProvider;
 import graphjob.GraphJob;
 import web.Model.TokenRep;
+import web.Servlets.LoginServlet;
 
 public class Initializer implements ServletContextListener {
 
 	private ScheduledExecutorService scheduler;
+	final static Logger logger = Logger.getLogger(Initializer.class);
 
     /**
      * On web application start, if necessary, creates folder for graphs, also
@@ -63,12 +64,12 @@ public class Initializer implements ServletContextListener {
 				e.printStackTrace();
 			}
             try {
-            	
+            	logger.info("Executing graphtask");
                 GraphJob.Execute(new Timestamp(System.currentTimeMillis()));
             } catch (IOException | SQLException ex) {
-                Logger.getLogger(GraphJob.class.getName()).log(Level.SEVERE, null, ex);
+            	logger.fatal("IO problem with graph task");
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Initializer.class.getName()).log(Level.SEVERE, null, ex);
+            	logger.fatal("Exception during graph task");
             }
             SQLConnectionProvider.setConnection(null);
         }
@@ -106,11 +107,9 @@ public class Initializer implements ServletContextListener {
             Driver driver = drivers.nextElement();
             try {
                 DriverManager.deregisterDriver(driver);
-                Logger.getLogger(Initializer.class.getName())
-                .log(Level.INFO, String.format("deregistering jdbc driver: %s", driver));
+                logger.info(String.format("deregistering jdbc driver: %s", driver));
             } catch (SQLException e) {
-            	Logger.getLogger(Initializer.class.getName())
-            	.log(Level.SEVERE, String.format("Error deregistering driver %s", driver), e);
+            	logger.info(String.format("Error deregistering jdbc driver: %s", driver));
             }
 
         }
