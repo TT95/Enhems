@@ -82,9 +82,9 @@ public class LoginServlet extends HttpServlet {
         Token token;
         logger.info("Into login");
         if (user == null) {
-        	logger.info("No token given");
             String userName = request.getParameter("username");
             String pass = request.getParameter("pass");
+            logger.info("No token given, username/password: "+userName+"/"+pass);
             if (userName == null || pass == null) {
                 response.sendError(HttpServletResponse.SC_FORBIDDEN);
                 return;
