@@ -7,7 +7,10 @@ package web.Model;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.List;
 
+import dao.SQLDao;
 import dao.models.Unit;
 
 /**
@@ -57,7 +60,7 @@ public class QueryBuilder {
      * @param atributes array of attributes
      * @return Array of queries for given user and attribute array
      */
-    static public String[] BuildQueries(int roomID, String[] atributes) {
+    static public String[] BuildQueries(Unit unit, String[] atributes) {
         String[] queries = new String[atributes.length];
         String table;
         String whereClause;
@@ -66,15 +69,15 @@ public class QueryBuilder {
             switch (atribute) {
             	case "Tf":
                 table = "enhems.heat_meass";
-                whereClause = " WHERE Unit_ID = " + roomID;
+                whereClause = " WHERE Unit_ID = " + matchingMediumForRoom(unit.getName());
                 break;
                 case "s_setpoint":
                     table = "enhems.slave_setpoint";
-                    whereClause = " WHERE Unit_ID = " + roomID;
+                    whereClause = " WHERE Unit_ID = " + unit.getId();
                     break;
                 case "fan_speed_limit":
                     table = "enhems.fan_speed_limit";
-                    whereClause = " WHERE Unit_ID = " + roomID;
+                    whereClause = " WHERE Unit_ID = " + unit.getId();
                     break;
                 case "Q":
                     table = "enhems.heat_meass";
@@ -82,11 +85,40 @@ public class QueryBuilder {
                     break;
                 default:
                     table = atribute.equals("Op_mode") ? "enhems.op_modes" : "enhems.measured_vars";
-                    whereClause = " WHERE Unit_ID =" + roomID;             
+                    whereClause = " WHERE Unit_ID =" + unit.getId();             
                     break;
             }
             queries[i++] = "SELECT " + atribute + " FROM " + table + whereClause + " ORDER BY Timestamp DESC LIMIT 1;";
         }
         return queries;
+    }
+    
+    /**
+     * Returns name of unit which has medium temperature for given room.
+     * (Kalorimetar koji ima ID 41 mjeri snagu soba s  IDjem [3,4...,15], a ID 42 je za sobe 1,2 i [16,17...,23].)
+     * @return
+     */
+    private static String matchingMediumForRoom(String roomName) {
+    	
+    	List<String> south = Arrays.asList("03","04","05","06","07","08","09","10","11","12",
+    			"13","14","15");
+    	String ninthLevel = "C9";
+    	
+    	String level = roomName.split("-")[0];
+    	String position = roomName.split("-")[1].substring(0, 2);
+    	
+    	if(south.contains(position)) {
+    		if(level.equals(ninthLevel)) {
+    			return "41";
+    		} else {
+    			return "42";
+    		}
+    	} else {
+    		if(level.equals(ninthLevel)) {
+    			return "43";
+    		} else {
+    			return "44";
+    		}
+    	}
     }
 }

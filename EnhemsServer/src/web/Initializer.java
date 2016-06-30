@@ -92,31 +92,31 @@ public class Initializer implements ServletContextListener {
     	
 
     	scheduler.shutdownNow();
-//    	try {
-//			scheduler.awaitTermination(90, TimeUnit.SECONDS);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//    	
-//    	DateUtils.clearThreadLocal();
-//    	try {
-//			AbandonedConnectionCleanupThread.shutdown();
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//    	
-//    	// This manually deregisters JDBC driver, which prevents Tomcat 7 from complaining about memory leaks wrto this class
-//        Enumeration<Driver> drivers = DriverManager.getDrivers();
-//        while (drivers.hasMoreElements()) {
-//            Driver driver = drivers.nextElement();
-//            try {
-//                DriverManager.deregisterDriver(driver);
-//                logger.info(String.format("deregistering jdbc driver: %s", driver));
-//            } catch (SQLException e) {
-//            	logger.info(String.format("Error deregistering jdbc driver: %s", driver));
-//            }
-//
-//        }
+    	try {
+			scheduler.awaitTermination(90, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+    	
+    	DateUtils.clearThreadLocal();
+    	try {
+			AbandonedConnectionCleanupThread.shutdown();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+    	
+    	// This manually deregisters JDBC driver, which prevents Tomcat 7 from complaining about memory leaks wrto this class
+        Enumeration<Driver> drivers = DriverManager.getDrivers();
+        while (drivers.hasMoreElements()) {
+            Driver driver = drivers.nextElement();
+            try {
+                DriverManager.deregisterDriver(driver);
+                logger.info(String.format("deregistering jdbc driver: %s", driver));
+            } catch (SQLException e) {
+            	logger.info(String.format("Error deregistering jdbc driver: %s", driver));
+            }
+
+        }
     	sce.getServletContext().setAttribute("enhems.dbpool", null);
     }
 

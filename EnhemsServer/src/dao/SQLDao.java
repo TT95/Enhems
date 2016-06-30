@@ -257,12 +257,12 @@ public class SQLDao {
 	public static String[] attributeValues(String roomName) {
 		
 		String[] attributes = new String[]{"Tqax", "Hzgb", "CO2zgb", "s_setpoint",
-				"Op_mode", "Q", "fan_speed_limit", "Tf"};
+				"Op_mode", "Q", "Tf", "fan_speed_limit"};
         String[] currentValues = new String[attributes.length];
         Unit unit = SQLDao.getUnit(roomName);
         
         int i = 0;
-        String[] queries = QueryBuilder.BuildQueries(unit.getId(), attributes);
+        String[] queries = QueryBuilder.BuildQueries(unit, attributes);
         
         Connection con = SQLConnectionProvider.getConnection();
 		PreparedStatement pst = null;
@@ -313,10 +313,10 @@ public class SQLDao {
     	                                }
     	                                break;
     	                            case 6:
-    	                                currentValues[i++] = String.valueOf(currentValue.getInt(1));
+    	                                currentValues[i++] = String.valueOf(currentValue.getInt(1))+ "°C";
     	                                break;
     	                            case 7:
-    	                                currentValues[i++] = String.valueOf(currentValue.getInt(1)) + "°C";
+    	                                currentValues[i++] = String.valueOf(currentValue.getInt(1));
     	                                break;
     	                        }
     	                    } else {

@@ -50,6 +50,7 @@ public class EnhemsDataModel implements DataModel {
 				data = ServerService.GetCurrentValuesData(selectedRoom);
 			}
 			public void afterExecution() {
+				//data[0] is empty, look at the server side!
 				graphs.clear();
 				opMode = true;
 		        systemOn = true;
@@ -66,7 +67,7 @@ public class EnhemsDataModel implements DataModel {
 		        
 		        if (opMode) {
 		        	setPoint = data[4];
-		        	FCspeed = data[7];
+		        	FCspeed = data[8];
 
 		        } else {
 		        	setPoint = "--°C";
@@ -74,7 +75,7 @@ public class EnhemsDataModel implements DataModel {
 		        }
 		        
 		        setPoint = data[4];
-		        FCspeed = data[7];
+		        FCspeed = data[8];
 		        
 		        fireAllListeners();
 		        //system status notification
