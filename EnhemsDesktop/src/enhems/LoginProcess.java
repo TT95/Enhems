@@ -111,9 +111,6 @@ public class LoginProcess {
 		appFrame.setSize(appFrame.getPreferredSize().width*2,appFrame.getPreferredSize().height*2);
 		Utilities.putFrameInScreenCenter(appFrame);
 		
-		usernameField.setText("tt47863");
-		passwordField.setText("85050366");
-		
 		button.addActionListener((l)-> {
 			removeErrorLabel();
 			showLoadingIcon();
