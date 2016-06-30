@@ -14,6 +14,6 @@
     <string name="curTemp_hr">Trenutna</string>
     <string name="setTemp_hr">Postavljena</string>
     <string name="co2">CO2</string>
-    <string name="root">https://161.53.68.191:8443/EnhemsServer/</string>
+    <string name="root">https://161.53.68.191:8444/EnhemsServer/</string>
     <string name="root1">https://192.168.0.16:8443/AppBE/</string>
 </resources>
