@@ -1,15 +1,7 @@
 package enhems;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.security.Security;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,22 +65,88 @@ public class Enhems extends JFrame {
 	private void loginGUI() {
 		LoginProcess.tokenLogin(this, new AbstractAction() {
 			private static final long serialVersionUID = 1L;
+
 			public void actionPerformed(ActionEvent e) {
 				ServerService.executeRequest(new ServerRequest() {
 					String[] units = null;
+
 					public void execute() {
 						units = ServerService.GetAssignedUnits();
 					}
+
 					public void afterExecution() {
 						mainGUI(units);
 					}
-				});	
+				});
 			}
 		});
 	}
 	
 	public void panelLogin() {
 		LoginProcess.createLoginGUI(this);
+	}
+
+	private void createSystemTray() {
+		TrayIcon trayIcon;
+		SystemTray tray = SystemTray.getSystemTray();
+		Image image = Toolkit.getDefaultToolkit().getImage("res/icons/enhems16.png");
+		ActionListener exitListener=new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Exiting....");
+				System.exit(0);
+			}
+		};
+		PopupMenu popup=new PopupMenu();
+		MenuItem defaultItem=new MenuItem("Exit");
+		defaultItem.addActionListener(exitListener);
+		popup.add(defaultItem);
+		defaultItem=new MenuItem("Open");
+		defaultItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(true);
+				setExtendedState(JFrame.NORMAL);
+			}
+		});
+		popup.add(defaultItem);
+		trayIcon = new TrayIcon(image,"Tray Icon", popup);
+		trayIcon.setImageAutoSize(true);
+
+
+
+		addWindowStateListener(new WindowStateListener() {
+			public void windowStateChanged(WindowEvent e) {
+				if(e.getNewState()==ICONIFIED){
+					try {
+						tray.add(trayIcon);
+						setVisible(false);
+						System.out.println("added to SystemTray");
+					} catch (AWTException ex) {
+						System.out.println("unable to add to tray");
+					}
+				}
+//				if(e.getNewState()==7){
+//					try{
+//						tray.add(trayIcon);
+//						setVisible(false);
+//						System.out.println("added to SystemTray");
+//					}catch(AWTException ex){
+//						System.out.println("unable to add to system tray");
+//					}
+//				}
+				if(e.getNewState()==MAXIMIZED_BOTH){
+					tray.remove(trayIcon);
+					setVisible(true);
+					System.out.println("Tray icon removed");
+				}
+				if(e.getNewState()==NORMAL){
+					tray.remove(trayIcon);
+					setVisible(true);
+					System.out.println("Tray icon removed");
+				}
+			}
+		});
+		setIconImage(Toolkit.getDefaultToolkit().getImage("Duke256.png"));
+
 	}
 	
 	private void mainGUI(String[] units) {
@@ -101,6 +159,12 @@ public class Enhems extends JFrame {
 
 		GraphPanel graphPanel = new GraphPanel("Graf", dataModel);
 		centerPanel.add(graphPanel);
+
+		if(SystemTray.isSupported()) {
+			createSystemTray();
+		} else {
+			Utilities.showErrorDialog("Warning", "System tray not supported", this, null);
+		}
 		
 		setVisible(true);
 		getContentPane().removeAll();
