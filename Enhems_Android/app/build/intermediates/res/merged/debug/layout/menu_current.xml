@@ -6,4 +6,3 @@
     <item android:id="@+id/action_logout" android:title="@string/action_logout"
         android:orderInCategory="200"  android:showAsAction="ifRoom"/>
 </menu>
-<!-- From: file:/C:/Users/TeoToplak/workspace/Enhems/Enhems_Android/app/src/main/res/layout/menu_current.xml -->

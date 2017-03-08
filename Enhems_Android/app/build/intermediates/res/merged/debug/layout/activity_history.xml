@@ -14,4 +14,3 @@
         android:id="@+id/history_graph"
         android:contentDescription="@string/imgview_desc" />
 </RelativeLayout>
-<!-- From: file:/C:/Users/TeoToplak/workspace/Enhems/Enhems_Android/app/src/main/res/layout/activity_history.xml -->

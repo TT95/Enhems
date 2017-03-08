@@ -4,4 +4,3 @@
     <item android:id="@+id/action_set_control" android:title="Promjeni"
           android:orderInCategory="100"  android:showAsAction="ifRoom"/>
 </menu>
-<!-- From: file:/C:/Users/TeoToplak/workspace/Enhems/Enhems_Android/app/src/main/res/layout/menu_control.xml -->

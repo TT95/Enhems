@@ -23,6 +23,8 @@ import web.Model.QueryBuilder;
  */
 public class GraphJob {
 
+    private static final String pathForGraphPictures = "C:\\pictures\\";
+
     /**
      * Executes the graphjob, generates all graphs
      *
@@ -141,7 +143,7 @@ public class GraphJob {
     private static String[] GetFileNames(String query) {
         String id = query.split("Unit_ID=")[1].split(" ")[0];
         String atribute = query.split(",")[1].split(" ")[0];
-        String filename = "C:\\pictures\\" + atribute + id;
+        String filename = pathForGraphPictures + atribute + id;
         return new String[]{filename + "LW.png", filename + "L24.png"};
     }
 

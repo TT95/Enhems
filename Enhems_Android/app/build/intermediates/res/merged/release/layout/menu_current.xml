@@ -1,9 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".CurrentActivity">
-    <item android:id="@+id/action_refresh" android:title="@string/action_refresh"
-        android:orderInCategory="100"  android:showAsAction="ifRoom"/>
-    <item android:id="@+id/action_logout" android:title="@string/action_logout"
-        android:orderInCategory="200"  android:showAsAction="ifRoom"/>
-</menu>
-<!-- From: file:/C:/Users/TeoToplak/AndroidStudioProjects/Enhems_Android/app/src/main/res/layout/menu_current.xml -->

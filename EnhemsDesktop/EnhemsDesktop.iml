@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <libelement value="jar://$MODULE_DIR$/src/enhems/res/lib/commons-codec-1.9.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/src/enhems/res/lib/commons-logging-1.2.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/src/enhems/res/lib/fluent-hc-4.4.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/src/enhems/res/lib/gral-core-0.10.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/src/enhems/res/lib/gson-2.3.1.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/src/enhems/res/lib/httpclient-4.4.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/src/enhems/res/lib/httpclient-4.5.1.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/src/enhems/res/lib/httpclient-cache-4.4.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/src/enhems/res/lib/httpclient-win-4.4.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/src/enhems/res/lib/httpcore-4.4.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/src/enhems/res/lib/httpmime-4.4.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/src/enhems/res/lib/jna-4.1.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/src/enhems/res/lib/jna-platform-4.1.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/src/enhems/res/lib/VectorGraphics2D-0.9.1.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/src/enhems/res/lib/bcprov-jdk15on-154.jar!/" />
+    <src_description expected_position="0">
+      <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/bin" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="module-library" exported="">
+      <library name="commons-codec-1.9.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/enhems/res/lib/commons-codec-1.9.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="commons-logging-1.2.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/enhems/res/lib/commons-logging-1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="fluent-hc-4.4.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/enhems/res/lib/fluent-hc-4.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="gral-core-0.10.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/enhems/res/lib/gral-core-0.10.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="gson-2.3.1.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/enhems/res/lib/gson-2.3.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="httpclient-4.4.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/enhems/res/lib/httpclient-4.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="httpclient-4.5.1.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/enhems/res/lib/httpclient-4.5.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="httpclient-cache-4.4.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/enhems/res/lib/httpclient-cache-4.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="httpclient-win-4.4.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/enhems/res/lib/httpclient-win-4.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="httpcore-4.4.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/enhems/res/lib/httpcore-4.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="httpmime-4.4.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/enhems/res/lib/httpmime-4.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="jna-4.1.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/enhems/res/lib/jna-4.1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="jna-platform-4.1.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/enhems/res/lib/jna-platform-4.1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="VectorGraphics2D-0.9.1.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/enhems/res/lib/VectorGraphics2D-0.9.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="bcprov-jdk15on-154.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/enhems/res/lib/bcprov-jdk15on-154.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>

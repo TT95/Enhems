@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/build/intermediates/res/merged/debug/layout/activity_login.xml",
+        "source": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/src/main/res/layout/activity_login.xml"
+    },
+    {
+        "merged": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/build/intermediates/res/merged/debug/layout/menu_history.xml",
+        "source": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/src/main/res/layout/menu_history.xml"
+    },
+    {
+        "merged": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/build/intermediates/res/merged/debug/layout/activity_control.xml",
+        "source": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/src/main/res/layout/activity_control.xml"
+    },
+    {
+        "merged": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/build/intermediates/res/merged/debug/layout/menu_current.xml",
+        "source": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/src/main/res/layout/menu_current.xml"
+    },
+    {
+        "merged": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/build/intermediates/res/merged/debug/layout/activity_history.xml",
+        "source": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/src/main/res/layout/activity_history.xml"
+    },
+    {
+        "merged": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/build/intermediates/res/merged/debug/layout/dialog_settemp.xml",
+        "source": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/src/main/res/layout/dialog_settemp.xml"
+    },
+    {
+        "merged": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/build/intermediates/res/merged/debug/layout/activity_current.xml",
+        "source": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/src/main/res/layout/activity_current.xml"
+    },
+    {
+        "merged": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/build/intermediates/res/merged/debug/layout/menu_control.xml",
+        "source": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/src/main/res/layout/menu_control.xml"
+    },
+    {
+        "merged": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/build/intermediates/res/merged/debug/layout/dialog_control.xml",
+        "source": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/src/main/res/layout/dialog_control.xml"
+    }
+]
