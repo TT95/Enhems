@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.security.Security;
 import java.util.*;
 import java.util.List;
 
@@ -24,8 +23,6 @@ import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.border.TitledBorder;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-
 import enhems.components.ControlPanel;
 import enhems.components.GraphPanel;
 import enhems.components.MeasuredUnitPanel;
@@ -35,11 +32,11 @@ public class Enhems extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private static final String pathToLoadingIcon = "res/icons/loading.gif";
+	private static final String pathToLoadTrayIcon = "res/icons/enhems16.png";
 	private EnhemsDataModel dataModel;
 	private Timer refreshDataModelTimer = new Timer();
 	
-	private JComboBox<String> roomSelected;
-	
+
 	public Enhems() {
 		setTitle("EnhemsApp");
 		setImageIcon();
@@ -91,7 +88,7 @@ public class Enhems extends JFrame {
 		SystemTray tray = SystemTray.getSystemTray();
 		BufferedImage trayIconImage = null;
 		try {
-			trayIconImage = ImageIO.read(getClass().getResource("res/icons/enhems16.png"));
+			trayIconImage = ImageIO.read(getClass().getResource(pathToLoadTrayIcon));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -107,7 +104,7 @@ public class Enhems extends JFrame {
 		defaultItem=new MenuItem("Open");
 		trayIcon = new TrayIcon(image,"Tray Icon", popup);
 		trayIcon.setImageAutoSize(true);
-		defaultItem.addActionListener(e -> fromSystemTray(tray,trayIcon));
+		defaultItem.addActionListener(e -> fromSystemTray());
 		popup.add(defaultItem);
 
 
@@ -116,12 +113,6 @@ public class Enhems extends JFrame {
             if(e.getNewState()==ICONIFIED){
 				toSystemTray(tray,trayIcon);
             }
-//            if(e.getNewState()==MAXIMIZED_BOTH){
-//                fromSystemTray(tray,trayIcon);
-//            }
-//            if(e.getNewState()==NORMAL){
-//				fromSystemTray(tray,trayIcon);
-//            }
         });
 
 		toSystemTray(tray,trayIcon);
@@ -139,7 +130,7 @@ public class Enhems extends JFrame {
 		}
 	}
 
-	private void fromSystemTray(SystemTray tray, TrayIcon icon) {
+	private void fromSystemTray() {
 		setState(0);
 		setVisible(true);
 	}
@@ -195,7 +186,7 @@ public class Enhems extends JFrame {
 		leftPanel.add(humidityPanel, c);
 
 		Set<String> rooms = dataModel.getRooms();
-		roomSelected = new JComboBox<>(rooms.toArray(new String[rooms.size()]));
+		JComboBox roomSelected = new JComboBox<>(rooms.toArray(new String[rooms.size()]));
 		roomSelected.setEnabled(true);
 		DefaultListCellRenderer dlcr = new DefaultListCellRenderer(); 
 		dlcr.setHorizontalAlignment(DefaultListCellRenderer.CENTER); 
@@ -203,7 +194,6 @@ public class Enhems extends JFrame {
 		roomSelected.setPreferredSize(new Dimension(150, roomSelected.getPreferredSize().height));
 		roomSelected.addActionListener(e -> {
 			@SuppressWarnings("unchecked")
-			JComboBox<String> roomSelected = (JComboBox<String>) e.getSource();
 			String selected = (String)roomSelected.getSelectedItem();
 			dataModel.setSelectedRoom(selected);
 		});
@@ -228,7 +218,7 @@ public class Enhems extends JFrame {
 					/**
 					 * using this sleep to show user that button was pressed
 					 * in case of fast refreshing, also removes possibility
-					 * for user to send to many requests at time by spaming 
+					 * for user to send to many requests at time by spamming 
 					 * button
 					 */
 					try {
