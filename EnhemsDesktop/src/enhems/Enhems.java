@@ -115,6 +115,7 @@ public class Enhems extends JFrame {
 
 		addWindowStateListener(new WindowStateListener() {
 			public void windowStateChanged(WindowEvent e) {
+				System.out.println(e.getNewState());
 				if(e.getNewState()==ICONIFIED){
 					try {
 						tray.add(trayIcon);
@@ -145,7 +146,7 @@ public class Enhems extends JFrame {
 				}
 			}
 		});
-		setIconImage(Toolkit.getDefaultToolkit().getImage("Duke256.png"));
+
 
 	}
 	
