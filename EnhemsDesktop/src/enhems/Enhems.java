@@ -2,13 +2,13 @@ package enhems;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.security.Security;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -89,65 +89,59 @@ public class Enhems extends JFrame {
 	private void createSystemTray() {
 		TrayIcon trayIcon;
 		SystemTray tray = SystemTray.getSystemTray();
-		Image image = Toolkit.getDefaultToolkit().getImage("res/icons/enhems16.png");
-		ActionListener exitListener=new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Exiting....");
-				System.exit(0);
-			}
-		};
+		BufferedImage trayIconImage = null;
+		try {
+			trayIconImage = ImageIO.read(getClass().getResource("res/icons/enhems16.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		int trayIconWidth = new TrayIcon(trayIconImage).getSize().width;
+		Image image = trayIconImage.getScaledInstance(trayIconWidth, -1, Image.SCALE_SMOOTH);
+		ActionListener exitListener= e -> {
+            System.exit(0);
+        };
 		PopupMenu popup=new PopupMenu();
 		MenuItem defaultItem=new MenuItem("Exit");
 		defaultItem.addActionListener(exitListener);
 		popup.add(defaultItem);
 		defaultItem=new MenuItem("Open");
-		defaultItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(true);
-				setExtendedState(JFrame.NORMAL);
-			}
-		});
-		popup.add(defaultItem);
 		trayIcon = new TrayIcon(image,"Tray Icon", popup);
 		trayIcon.setImageAutoSize(true);
+		defaultItem.addActionListener(e -> fromSystemTray(tray,trayIcon));
+		popup.add(defaultItem);
 
 
+		addWindowStateListener(e -> {
+            System.out.println(e.getNewState());
+            if(e.getNewState()==ICONIFIED){
+				toSystemTray(tray,trayIcon);
+            }
+//            if(e.getNewState()==MAXIMIZED_BOTH){
+//                fromSystemTray(tray,trayIcon);
+//            }
+//            if(e.getNewState()==NORMAL){
+//				fromSystemTray(tray,trayIcon);
+//            }
+        });
 
-		addWindowStateListener(new WindowStateListener() {
-			public void windowStateChanged(WindowEvent e) {
-				System.out.println(e.getNewState());
-				if(e.getNewState()==ICONIFIED){
-					try {
-						tray.add(trayIcon);
-						setVisible(false);
-						System.out.println("added to SystemTray");
-					} catch (AWTException ex) {
-						System.out.println("unable to add to tray");
-					}
-				}
-//				if(e.getNewState()==7){
-//					try{
-//						tray.add(trayIcon);
-//						setVisible(false);
-//						System.out.println("added to SystemTray");
-//					}catch(AWTException ex){
-//						System.out.println("unable to add to system tray");
-//					}
-//				}
-				if(e.getNewState()==MAXIMIZED_BOTH){
-					tray.remove(trayIcon);
-					setVisible(true);
-					System.out.println("Tray icon removed");
-				}
-				if(e.getNewState()==NORMAL){
-					tray.remove(trayIcon);
-					setVisible(true);
-					System.out.println("Tray icon removed");
-				}
+		toSystemTray(tray,trayIcon);
+
+	}
+
+	private void toSystemTray(SystemTray tray, TrayIcon icon) {
+		try {
+			if(!Arrays.asList(tray.getTrayIcons()).contains(icon)) {
+				tray.add(icon);
 			}
-		});
+			dispose();
+		} catch (AWTException ex) {
+			Utilities.showErrorDialog("Error", "Program cannot be added to system tray!", this, ex);
+		}
+	}
 
-
+	private void fromSystemTray(SystemTray tray, TrayIcon icon) {
+		setState(0);
+		setVisible(true);
 	}
 	
 	private void mainGUI(String[] units) {
@@ -166,8 +160,8 @@ public class Enhems extends JFrame {
 		} else {
 			Utilities.showErrorDialog("Warning", "System tray not supported", this, null);
 		}
-		
-		setVisible(true);
+
+
 		getContentPane().removeAll();
 		getContentPane().repaint();
 		setLayout(new BorderLayout());
@@ -280,6 +274,7 @@ public class Enhems extends JFrame {
 		
 		
 		dataModel.setSelectedRoom((String)roomSelected.getSelectedItem());
+
 	}
 	
 
