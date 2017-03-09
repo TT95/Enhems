@@ -1,13 +1,21 @@
 package enhems;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.*;
+import java.util.*;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
+/**
+ * This class provides some tools needed throughout application
+ */
 public class Utilities {
+
+	public static void setEnhemsIconToFrame(JFrame frame) {
+		java.util.List<Image> icons = new ArrayList<>();
+		icons.add(new ImageIcon(Utilities.class.getResource("res/icons/enhems32.png")).getImage());
+		icons.add(new ImageIcon(Utilities.class.getResource("res/icons/enhems16.png")).getImage());
+		frame.setIconImages(icons);
+	}
 	
 	public static void putFrameInScreenCenter(JFrame frame) {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

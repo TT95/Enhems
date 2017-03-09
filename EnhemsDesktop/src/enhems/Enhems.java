@@ -5,7 +5,6 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.*;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
@@ -39,7 +38,7 @@ public class Enhems extends JFrame {
 
 	public Enhems() {
 		setTitle("EnhemsApp");
-		setImageIcon();
+		Utilities.setEnhemsIconToFrame(this);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -50,15 +49,11 @@ public class Enhems extends JFrame {
 		});
 		loginGUI();
 	}
-	
-	private void setImageIcon() {
-		List<Image> icons = new ArrayList<>();
-		icons.add(new ImageIcon(Utilities.class.getResource("res/icons/enhems32.png")).getImage());
-		icons.add(new ImageIcon(Utilities.class.getResource("res/icons/enhems16.png")).getImage());
-		setIconImages(icons);
-	}
-	
-	
+
+	/**
+	 * starts login process and if connection to server is made
+	 * method mainGUI is started which builds GUI
+	 */
 	private void loginGUI() {
 		LoginProcess.tokenLogin(this, new AbstractAction() {
 			private static final long serialVersionUID = 1L;
@@ -83,57 +78,6 @@ public class Enhems extends JFrame {
 		LoginProcess.createLoginGUI(this);
 	}
 
-	private void createSystemTray() {
-		TrayIcon trayIcon;
-		SystemTray tray = SystemTray.getSystemTray();
-		BufferedImage trayIconImage = null;
-		try {
-			trayIconImage = ImageIO.read(getClass().getResource(pathToLoadTrayIcon));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		int trayIconWidth = new TrayIcon(trayIconImage).getSize().width;
-		Image image = trayIconImage.getScaledInstance(trayIconWidth, -1, Image.SCALE_SMOOTH);
-		ActionListener exitListener= e -> {
-            System.exit(0);
-        };
-		PopupMenu popup=new PopupMenu();
-		MenuItem defaultItem=new MenuItem("Exit");
-		defaultItem.addActionListener(exitListener);
-		popup.add(defaultItem);
-		defaultItem=new MenuItem("Open");
-		trayIcon = new TrayIcon(image,"Tray Icon", popup);
-		trayIcon.setImageAutoSize(true);
-		defaultItem.addActionListener(e -> fromSystemTray());
-		popup.add(defaultItem);
-
-
-		addWindowStateListener(e -> {
-            System.out.println(e.getNewState());
-            if(e.getNewState()==ICONIFIED){
-				toSystemTray(tray,trayIcon);
-            }
-        });
-
-		toSystemTray(tray,trayIcon);
-
-	}
-
-	private void toSystemTray(SystemTray tray, TrayIcon icon) {
-		try {
-			if(!Arrays.asList(tray.getTrayIcons()).contains(icon)) {
-				tray.add(icon);
-			}
-			dispose();
-		} catch (AWTException ex) {
-			Utilities.showErrorDialog("Error", "Program cannot be added to system tray!", this, ex);
-		}
-	}
-
-	private void fromSystemTray() {
-		setState(0);
-		setVisible(true);
-	}
 	
 	private void mainGUI(String[] units) {
 		
@@ -218,7 +162,7 @@ public class Enhems extends JFrame {
 					/**
 					 * using this sleep to show user that button was pressed
 					 * in case of fast refreshing, also removes possibility
-					 * for user to send to many requests at time by spamming 
+					 * for user to send to many requests at time by spamming
 					 * button
 					 */
 					try {
@@ -294,6 +238,58 @@ public class Enhems extends JFrame {
 
 	public EnhemsDataModel getDataModel() {
 		return dataModel;
+	}
+
+	private void createSystemTray() {
+		TrayIcon trayIcon;
+		SystemTray tray = SystemTray.getSystemTray();
+		BufferedImage trayIconImage = null;
+		try {
+			trayIconImage = ImageIO.read(getClass().getResource(pathToLoadTrayIcon));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		int trayIconWidth = new TrayIcon(trayIconImage).getSize().width;
+		Image image = trayIconImage.getScaledInstance(trayIconWidth, -1, Image.SCALE_SMOOTH);
+		ActionListener exitListener= e -> {
+			System.exit(0);
+		};
+		PopupMenu popup=new PopupMenu();
+		MenuItem defaultItem=new MenuItem("Exit");
+		defaultItem.addActionListener(exitListener);
+		popup.add(defaultItem);
+		defaultItem=new MenuItem("Open");
+		trayIcon = new TrayIcon(image,"Tray Icon", popup);
+		trayIcon.setImageAutoSize(true);
+		defaultItem.addActionListener(e -> fromSystemTray());
+		popup.add(defaultItem);
+
+
+		addWindowStateListener(e -> {
+			System.out.println(e.getNewState());
+			if(e.getNewState()==ICONIFIED){
+				toSystemTray(tray,trayIcon);
+			}
+		});
+
+		toSystemTray(tray,trayIcon);
+
+	}
+
+	private void toSystemTray(SystemTray tray, TrayIcon icon) {
+		try {
+			if(!Arrays.asList(tray.getTrayIcons()).contains(icon)) {
+				tray.add(icon);
+			}
+			dispose();
+		} catch (AWTException ex) {
+			Utilities.showErrorDialog("Error", "Program cannot be added to system tray!", this, ex);
+		}
+	}
+
+	private void fromSystemTray() {
+		setState(0);
+		setVisible(true);
 	}
 
 }

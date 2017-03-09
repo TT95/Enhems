@@ -23,6 +23,9 @@ import javax.swing.border.Border;
 import enhems.components.ElementsCustomPanel;
 import enhems.components.ImagePanel;
 
+/**
+ * this class is handling all processes connected with logging in on server
+ */
 public class LoginProcess {
 
 	private static final String pathToLoadingIcon = "res/icons/loading.gif";
@@ -33,7 +36,13 @@ public class LoginProcess {
 	private static JLabel error;
 	private static JFrame loadingFrame;
 	private static ElementsCustomPanel loginPanel;
-	
+
+	/**
+	 *
+	 * @param enhems
+	 * @param actionAfterLogin implemented as action cause there is blocking request towards server and program
+	 *                         cannot continue executing code until response is received
+	 */
 	public static void tokenLogin(Enhems enhems, AbstractAction actionAfterLogin) {
 		LoginProcess.actionAfterLogin = actionAfterLogin;
 		if(Token.isEmpty()) {
@@ -65,6 +74,7 @@ public class LoginProcess {
 
 	private static void createLoadingFrame() {
 		loadingFrame = new JFrame();
+		Utilities.setEnhemsIconToFrame(loadingFrame);
 		loadingFrame.dispose();
 		loadingFrame.setUndecorated(true);
 		loadingFrame.setVisible(true);
