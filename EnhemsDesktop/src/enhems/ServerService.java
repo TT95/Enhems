@@ -22,10 +22,9 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 public class ServerService {
-	
-//	private static String serverRoot = "https://192.168.0.16:8443/AppBE/";
-//	private static String serverRoot = "http://192.168.10.92:8080/AppBE/";
-	private static String serverRoot = "https://161.53.68.191:8444/EnhemsServer/";
+
+    private static String serverRoot = "https://localhost:8443/EnhemsServer/";
+//	private static String serverRoot = "https://161.53.68.191:8444/EnhemsServer/";
 
 	public static void executeRequest(ServerRequest request) {
 		new Thread(()-> {
