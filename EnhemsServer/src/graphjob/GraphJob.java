@@ -15,6 +15,7 @@ import java.util.Map;
 
 import dao.SQLDao;
 import dao.models.Unit;
+import utilities.CommonUtilities;
 import web.Model.QueryBuilder;
 
 /**
@@ -23,7 +24,8 @@ import web.Model.QueryBuilder;
  */
 public class GraphJob {
 
-    private static final String pathForGraphPictures = "C:\\pictures\\";
+    private static final String pathForGraphPictures =
+            CommonUtilities.getServerConf().getProperty("graphs");
 
     /**
      * Executes the graphjob, generates all graphs
