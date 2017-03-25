@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Enumeration;
+import java.util.Properties;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -25,6 +26,7 @@ import com.mysql.jdbc.AbandonedConnectionCleanupThread;
 import dao.EnhemsDB;
 import dao.SQLConnectionProvider;
 import graphjob.GraphJob;
+import utilities.CommonUtilities;
 import web.Model.TokenRep;
 import web.Servlets.LoginServlet;
 
@@ -32,6 +34,7 @@ public class Initializer implements ServletContextListener {
 
 	private ScheduledExecutorService scheduler;
 	final static Logger logger = Logger.getLogger(Initializer.class);
+    private static Properties conf = CommonUtilities.getServerConf();
 
     /**
      * On web application start, if necessary, creates folder for graphs, also
@@ -46,8 +49,8 @@ public class Initializer implements ServletContextListener {
     	
     	scheduler = Executors.newScheduledThreadPool(2);
     	
-        if (!Files.isDirectory(Paths.get("C:\\pictures"))) {
-            new File("C:\\pictures").mkdir();
+        if (!Files.isDirectory(Paths.get(conf.getProperty("graphs")))) {
+            new File(conf.getProperty("graphs")).mkdir();
         }
         
         scheduler.scheduleAtFixedRate(new GraphTask(), 0, 1, TimeUnit.HOURS);
