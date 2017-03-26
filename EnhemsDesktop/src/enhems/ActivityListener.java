@@ -43,7 +43,7 @@ public class ActivityListener implements NativeMouseMotionListener{
             GlobalScreen.registerNativeHook();
             GlobalScreen.addNativeMouseMotionListener(this);
         } catch (Exception e) {
-            //LOGGER HERE
+            MyLogger.log("Error registering native hook", e);
         }
 
         /* Note: JNativeHook does *NOT* operate on the event dispatching thread.

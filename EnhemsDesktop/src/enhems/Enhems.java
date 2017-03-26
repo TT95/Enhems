@@ -44,12 +44,14 @@ public class Enhems extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				//close timer thread
 				refreshDataModelTimer.cancel();
 				refreshDataModelTimer.purge();
 				try {
+					//close hook thread
 				GlobalScreen.unregisterNativeHook();
 				} catch (Exception ex) {
-					//DO LOGGER HERE!
+					MyLogger.log("Problem closing some context thread with application", ex);
 				}
 				System.runFinalization();
 			}
@@ -68,11 +70,9 @@ public class Enhems extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ServerService.executeRequest(new ServerRequest() {
 					String[] units = null;
-
 					public void execute() {
 						units = ServerService.GetAssignedUnits();
 					}
-
 					public void afterExecution() {
 						mainGUI(units);
 					}
@@ -80,35 +80,41 @@ public class Enhems extends JFrame {
 			}
 		});
 	}
-	
+
+	/**
+	 * Used if there is no token for login
+	 */
 	public void panelLogin() {
 		LoginProcess.createLoginGUI(this);
 	}
 
 
-	/*This GUI is loaded when authorization of user was made*/
+	/**
+	 * This GUI is loaded when authorization of user was made
+	 * @param units room - units
+	 */
 	private void mainGUI(String[] units) {
 		
 		dataModel = new EnhemsDataModel(units);
-		
+		//refresh data periodically
 		initTimerRefresh(dataModel);
 		
 		JPanel centerPanel = new JPanel(new GridLayout(1,0));
-
 		GraphPanel graphPanel = new GraphPanel("Graf", dataModel);
 		centerPanel.add(graphPanel);
 
+		//put in system tray if possible
 		if(SystemTray.isSupported()) {
 			createSystemTray();
 		} else {
 			Utilities.showErrorDialog("Warning", "System tray not supported", this, null);
 		}
 
-
+		//refresh GUI for main interface
 		getContentPane().removeAll();
 		getContentPane().repaint();
-		setLayout(new BorderLayout());
 
+		setLayout(new BorderLayout());
 		JPanel upperPanel = new JPanel(new GridBagLayout());
 		JPanel leftPanel = new JPanel(new GridBagLayout());
 		
