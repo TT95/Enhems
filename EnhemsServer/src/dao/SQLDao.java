@@ -253,6 +253,25 @@ public class SQLDao {
 			throw ex;
 		}
 	}
+
+	public static void setActivity(int userId, int activity) throws SQLException {
+
+		Connection con = SQLConnectionProvider.getConnection();
+		PreparedStatement pst = null;
+		try {
+			pst = con.prepareStatement("INSERT INTO enhems.user_activity (User_ID,activity)"
+					+ " VALUES (" + userId + "," + activity + ");");
+			try {
+
+				pst.executeUpdate();
+
+			} finally {
+				try { pst.close(); } catch(Exception ignorable ) { }
+			}
+		} catch(SQLException ex) {
+			throw ex;
+		}
+	}
 	
 	public static String[] attributeValues(String roomName) {
 		

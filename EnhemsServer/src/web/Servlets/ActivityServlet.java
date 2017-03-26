@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package web.Servlets;
+
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -20,13 +16,12 @@ import dao.SQLDao;
 import dao.models.User;
 
 /**
- *
- * @author Teo Toplak
+ * Created by TeoLenovo on 3/26/2017.
  */
-@WebServlet(name = "FCspeedServlet", urlPatterns = {"/FCspeed"})
-public class FCspeedServlet extends HttpServlet {
+@WebServlet(name = "ActivityServlet", urlPatterns = {"/activity"})
+public class ActivityServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -45,6 +40,8 @@ public class FCspeedServlet extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
+     * If activity is 1 - user active, 0 - user inactive
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -54,10 +51,9 @@ public class FCspeedServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         User user=(User)request.getSession().getAttribute("user");
-        String unitName = request.getParameter("room");
         try {
-        	int fcspeed = Integer.valueOf(request.getParameter("fcspeed"));
-            SQLDao.setFCspeed(user.getUserID(), fcspeed, unitName);
+            int activity = Integer.valueOf(request.getParameter("activity"));
+            SQLDao.setActivity(user.getUserID(), activity);
             response.setStatus(HttpServletResponse.SC_OK);
         } catch (SQLException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
@@ -67,5 +63,4 @@ public class FCspeedServlet extends HttpServlet {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
-
 }

@@ -83,10 +83,36 @@ public class ServerService {
 
         return preSetPoint;
     }
+
+    /**
+     * Send activity of user on server (is he using the computer or not)
+     */
+    public static void sendActivity(boolean activity) {
+        HttpClient httpclient = AppHttpClient.GetInstance();
+        HttpPost request = new HttpPost(serverRoot + "activity");
+        List<NameValuePair> params = new ArrayList<>();
+        //server needs 0 or 1 for activity
+        int active = activity==false? 0 : 1;
+        params.add(new BasicNameValuePair("activity", active + ""));
+        params.add(new BasicNameValuePair("token", Token.getToken()));
+        try {
+            request.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+            HttpResponse response = httpclient.execute(request);
+            EntityUtils.consume(response.getEntity()); // to deallocate connection
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 200) {
+                request.releaseConnection();
+                return;
+            }
+        } catch (IOException ex) {
+            MyLogger.log("Error setting activity on server", ex);
+        }
+        request.releaseConnection();
+    }
 	
 	
     /**
-     * @param context application context
+     * @param room room
      * @return String array of current room data
      */
     public static String[] GetCurrentValuesData(String room) {
@@ -111,7 +137,7 @@ public class ServerService {
     
     /**
      * 
-     * @return All unti names avaliable to user in String array
+     * @return All unti names available to user in String array
      */
     public static String[] GetAssignedUnits() {
         HttpClient httpclient = AppHttpClient.GetInstance();

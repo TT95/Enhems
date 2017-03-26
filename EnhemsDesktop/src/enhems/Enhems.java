@@ -25,6 +25,7 @@ import javax.swing.border.TitledBorder;
 import enhems.components.ControlPanel;
 import enhems.components.GraphPanel;
 import enhems.components.MeasuredUnitPanel;
+import org.jnativehook.GlobalScreen;
 
 
 public class Enhems extends JFrame {
@@ -45,6 +46,12 @@ public class Enhems extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				refreshDataModelTimer.cancel();
 				refreshDataModelTimer.purge();
+				try {
+				GlobalScreen.unregisterNativeHook();
+				} catch (Exception ex) {
+					//DO LOGGER HERE!
+				}
+				System.runFinalization();
 			}
 		});
 		loginGUI();
@@ -78,7 +85,8 @@ public class Enhems extends JFrame {
 		LoginProcess.createLoginGUI(this);
 	}
 
-	
+
+	/*This GUI is loaded when authorization of user was made*/
 	private void mainGUI(String[] units) {
 		
 		dataModel = new EnhemsDataModel(units);
@@ -208,6 +216,9 @@ public class Enhems extends JFrame {
 		
 		
 		dataModel.setSelectedRoom((String)roomSelected.getSelectedItem());
+
+		//this activates activity listener
+		new ActivityListener();
 
 	}
 	

@@ -21,7 +21,7 @@ import dao.models.User;
 
 /**
  *
- * @author Stjepan
+ * @author Teo Toplak
  */
 @WebServlet(name = "SetpointServlet", urlPatterns = {"/Setpoint"})
 public class SetpointServlet extends HttpServlet {
