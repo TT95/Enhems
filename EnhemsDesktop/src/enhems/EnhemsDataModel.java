@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import enhems.components.ImagePanel;
+import enhems.utilities.CommonUtilities;
 
 
 public class EnhemsDataModel implements DataModel {
@@ -101,12 +102,7 @@ public class EnhemsDataModel implements DataModel {
 	public  ImagePanel getSelectedGraph() {		
 		
 		if(selectedRoom == null) {
-			try {
-				return new ImagePanel(ImageIO.read(
-						Utilities.class.getResource("res/icons/enhemsBig.png")));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			return new ImagePanel(CommonUtilities.getImageByName("enhemsBig.png"));
 		}
 		
 		if(!graphs.containsKey(selectedRoom)) {
@@ -123,8 +119,7 @@ public class EnhemsDataModel implements DataModel {
 		}
 		
 		//setting loading icon 
-		ImageIcon graphLoaderIcon = new ImageIcon(
-				Utilities.class.getResource("res/icons/graph_loader.gif"));
+		ImageIcon graphLoaderIcon = new ImageIcon(CommonUtilities.getImageByName("graph_loader.gif"));
 		EnhemsGraph graph = new EnhemsGraph(graphName, graphLoaderIcon.getImage());
 		list.add(graph);
 				

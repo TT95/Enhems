@@ -22,6 +22,7 @@ import javax.swing.border.Border;
 
 import enhems.components.ElementsCustomPanel;
 import enhems.components.ImagePanel;
+import enhems.utilities.CommonUtilities;
 
 /**
  * this class is handling all processes connected with logging in on server
@@ -74,18 +75,17 @@ public class LoginProcess {
 
 	private static void createLoadingFrame() {
 		loadingFrame = new JFrame();
-		Utilities.setEnhemsIconToFrame(loadingFrame);
+		CommonUtilities.setEnhemsIconToFrame(loadingFrame);
 		loadingFrame.dispose();
 		loadingFrame.setUndecorated(true);
 		loadingFrame.setVisible(true);
-		ImageIcon enhemsIcon = new ImageIcon(
-				Utilities.class.getResource("res/icons/enhemsGIF.gif"));
+		ImageIcon enhemsIcon = new ImageIcon(CommonUtilities.getImageByName("enhemsGIF.gif"));
 		ImagePanel enhemsPanel = new ImagePanel(enhemsIcon.getImage());
 		enhemsPanel.setPreferredSize(new Dimension(400, 220));
 		loadingFrame.setLayout(new GridBagLayout());
 		loadingFrame.add(enhemsPanel, new GridBagConstraints());
 		loadingFrame.pack();
-		Utilities.putFrameInScreenCenter(loadingFrame);
+		CommonUtilities.putFrameInScreenCenter(loadingFrame);
 
 	}
 
@@ -119,7 +119,7 @@ public class LoginProcess {
 		appFrame.getContentPane().add(loginPanel, new GridBagConstraints());
 		appFrame.pack();
 		appFrame.setSize(appFrame.getPreferredSize().width*2,appFrame.getPreferredSize().height*2);
-		Utilities.putFrameInScreenCenter(appFrame);
+		CommonUtilities.putFrameInScreenCenter(appFrame);
 		
 		button.addActionListener((l)-> {
 			removeErrorLabel();
@@ -172,7 +172,7 @@ public class LoginProcess {
 	
 	private static void showLoadingIcon() {
 		ImageIcon loadingIcon = new ImageIcon(
-				Utilities.class.getResource(pathToLoadingIcon));
+				CommonUtilities.class.getResource(pathToLoadingIcon));
 		button.setHorizontalTextPosition(JButton.LEFT);
 		button.setIcon(loadingIcon);
 		button.setEnabled(false);

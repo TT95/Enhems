@@ -13,16 +13,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import enhems.Utilities;
+import enhems.utilities.CommonUtilities;
 
 public class FCspeedPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private static final String pathToShutdownIcon = "res/icons/shutdown32.png";
-	private static final String pathToSmallFanIcon = "res/icons/fan32.png";
-	private static final String pathToMediumFanIcon = "res/icons/fan42.png";
-	private static final String pathToBigFanIcon = "res/icons/fan52.png";
-
 
 	private List<JButton> buttonsList;
 	private int selectedButton;
@@ -34,10 +29,10 @@ public class FCspeedPanel extends JPanel {
 	 */
 	public FCspeedPanel(int startingFCspeed) {
 		buttonsList = new ArrayList<>();
-		JButton shutdownFan = new JButton(new ImageIcon(Utilities.class.getResource(pathToShutdownIcon)));
-		JButton smallFan = new JButton(new ImageIcon(Utilities.class.getResource(pathToSmallFanIcon)));
-		JButton mediumFan = new JButton(new ImageIcon(Utilities.class.getResource(pathToMediumFanIcon)));
-		JButton bigFan = new JButton(new ImageIcon(Utilities.class.getResource(pathToBigFanIcon)));
+		JButton shutdownFan = new JButton(new ImageIcon(CommonUtilities.getImageByName("shutdown32.png")));
+		JButton smallFan = new JButton(new ImageIcon(CommonUtilities.getImageByName("fan32.png")));
+		JButton mediumFan = new JButton(new ImageIcon(CommonUtilities.getImageByName("fan42.png")));
+		JButton bigFan = new JButton(new ImageIcon(CommonUtilities.getImageByName("fan52.png")));
 		shutdownFan.addActionListener(getButtonAction());
 		smallFan.addActionListener(getButtonAction());
 		mediumFan.addActionListener(getButtonAction());

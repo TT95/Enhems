@@ -22,14 +22,13 @@ import enhems.DataListener;
 import enhems.EnhemsDataModel;
 import enhems.ServerRequest;
 import enhems.ServerService;
-import enhems.Utilities;
+import enhems.utilities.CommonUtilities;
 
 public class ControlPanel extends ElementsCustomPanel implements DataListener {
 
 	private static final long serialVersionUID = 1L;
 	
 	private static Dimension changeDialogSize = new Dimension(350, 150);
-	private static String tempIconPath = "res/icons/temperature25.png";
 	private JTextField setpointField;
 	private JTextField fcspeedField;
 	private JSpinner setPointSpinner;
@@ -74,7 +73,7 @@ public class ControlPanel extends ElementsCustomPanel implements DataListener {
     		try {
     			showChangeDialog( getSetPointValue(),getFCSpeedValue()); 
     		} catch (Exception e) {
-    			Utilities.showErrorDialog("Info", "Vrijednosti se postavljaju prvi puta: \n "
+    			CommonUtilities.showErrorDialog("Info", "Vrijednosti se postavljaju prvi puta: \n "
     					+ "predocene su uobicajene postavke koje trenutno ne vrijede \n"
     					+ "(setpoint: "+defaultSetpoint+"°C, brzina ventilatora: "+defaultFCspeed+" )", this, e);
     			showChangeDialog(defaultSetpoint,defaultFCspeed); 
@@ -99,7 +98,7 @@ public class ControlPanel extends ElementsCustomPanel implements DataListener {
 		panel.setPreferredSize(changeDialogSize);
 		JLabel setPointLabel = new JLabel("Postavljena temperatura: ");
 		FCspeedPanel FCspeedPanel = new FCspeedPanel(FCSpeed);
-		ImageIcon tempIcon = new ImageIcon(Utilities.class.getResource(tempIconPath));
+		ImageIcon tempIcon = new ImageIcon(CommonUtilities.getImageByName("temperature25.png"));
 		ImagePanel tempIconPanel = new ImagePanel(tempIcon.getImage());
 		tempIconPanel.setPreferredSize(new Dimension(25, 25));
 		
@@ -154,7 +153,7 @@ public class ControlPanel extends ElementsCustomPanel implements DataListener {
 				public void afterExecution() {
 					
 					if(setPointRes != null) {
-						Utilities.showErrorDialog("Greška",
+						CommonUtilities.showErrorDialog("Greška",
 								"Greška tijekom postavljanja kontrolnih podataka"
 								+ " (Postavljena temperatura)", null, null);
 						setpointField.setText(setPointRes);
@@ -168,7 +167,7 @@ public class ControlPanel extends ElementsCustomPanel implements DataListener {
 					}
 					
 					if(FCspeedRes != null) {
-						Utilities.showErrorDialog("Greška",
+						CommonUtilities.showErrorDialog("Greška",
 								"Greška tijekom postavljanja kontrolnih podataka"
 								+ " (Brzina ventilatora)", null, null);
 						fcspeedField.setText(FCspeedRes);

@@ -12,6 +12,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
 
+import enhems.utilities.CommonUtilities;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -23,8 +24,8 @@ import org.apache.http.util.EntityUtils;
 
 public class ServerService {
 
-    private static String serverRoot = "https://localhost:8443/EnhemsServer/";
-//	private static String serverRoot = "https://161.53.68.191:8444/EnhemsServer/";
+//    private static String serverRoot = "https://localhost:8443/EnhemsServer/";
+	private static String serverRoot = "https://161.53.68.191:8444/EnhemsServer/";
 
 	public static void executeRequest(ServerRequest request) {
 		new Thread(()-> {
@@ -36,7 +37,7 @@ public class ServerService {
 			});
 		}).start();
 	}
-	
+
     public static String FCspeed(String fcspeed, final String preFCspeed, String room) {
         HttpClient httpclient = AppHttpClient.GetInstance();
         HttpPost request = new HttpPost(serverRoot + "FCspeed");
@@ -195,7 +196,7 @@ public class ServerService {
 			
 			MyLogger.log("Error doing login on the server", ex);
 			if(ex instanceof ConnectException) {
-				Utilities.showErrorDialog("Error", "Connection timed out.\nServer could be offline.", null, ex);
+				CommonUtilities.showErrorDialog("Error", "Connection timed out.\nServer could be offline.", null, ex);
 				System.exit(1);
 			}
 		}
@@ -221,20 +222,14 @@ public class ServerService {
                  if (statusCode == 200) {
                      return ImageIO.read(new ByteArrayInputStream(image));
                  } else if (statusCode == 404) {
-             		try {
-            			return ImageIO.read(
-            					Utilities.class.getResource("res/icons/NoData.png"));
-            		} catch (IOException e) {
-            			e.printStackTrace();
-            		}
-                	 return null;
+                     return CommonUtilities.getImageByName("NoData.png");
                  } else {
-                	 Utilities.showErrorDialog("Greška "+statusCode,
+                	 CommonUtilities.showErrorDialog("Greška "+statusCode,
                 			 "Greška sa poslužiteljske strane prilikom dohvata grafa", null, null);
                 	 return null;
                  }
              } catch (IOException ex) {
-            	 Utilities.showErrorDialog("Greška",
+            	 CommonUtilities.showErrorDialog("Greška",
             			 "Neuspješno uspostavljanje veze sa poslužiteljem"
             			 + " prilikom dohvata grafa", null, ex);
             	 request.releaseConnection();

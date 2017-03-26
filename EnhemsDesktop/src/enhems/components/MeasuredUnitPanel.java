@@ -15,12 +15,12 @@ import javax.swing.SwingConstants;
 import enhems.DataListener;
 import enhems.EnhemsDataModel;
 import enhems.GraphCodes;
-import enhems.Utilities;
+import enhems.utilities.CommonUtilities;
 
 public class MeasuredUnitPanel extends JPanel implements DataListener{
 
 	private static final long serialVersionUID = 1L;
-	private static final String pathToArrowIcon = "res/icons/arrow.png";
+	private static final String pathToArrowIcon = "../res/icons/arrow.png";
 	private static List<MeasuredUnitPanel> panelsList = new ArrayList<>();
 	private ImageIcon arrowIcon;
 	private JButton button;
@@ -38,16 +38,16 @@ public class MeasuredUnitPanel extends JPanel implements DataListener{
 	 * @param dataModel
 	 * @param graphCode code from class {@link GraphCodes}
 	 */
-	public MeasuredUnitPanel(String title, String pathToIconRes,
+	public MeasuredUnitPanel(String title, String nameOfIcon,
 			EnhemsDataModel dataModel, String graphCode) {
 		
 		this.dataModel=dataModel;
 		this.graphCode=graphCode;
 		dataModel.addListener(this);
 		
-		arrowIcon = new ImageIcon(Utilities.class.getResource(pathToArrowIcon));
+		arrowIcon = new ImageIcon(CommonUtilities.getImageByName("arrow.png"));
 		selected = false;
-		button = new JButton("---",new ImageIcon(Utilities.class.getResource(pathToIconRes)));
+		button = new JButton("---",new ImageIcon(CommonUtilities.getImageByName(nameOfIcon)));
 		arrowLabel = new JLabel();
 		JPanel arrowPanel = new JPanel(new GridBagLayout());
 		JPanel iconPanel = new JPanel(new GridBagLayout());

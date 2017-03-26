@@ -25,21 +25,21 @@ import javax.swing.border.TitledBorder;
 import enhems.components.ControlPanel;
 import enhems.components.GraphPanel;
 import enhems.components.MeasuredUnitPanel;
+import enhems.utilities.CommonUtilities;
+import enhems.utilities.CreateSystemTray;
 import org.jnativehook.GlobalScreen;
 
 
 public class Enhems extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private static final String pathToLoadingIcon = "res/icons/loading.gif";
-	private static final String pathToLoadTrayIcon = "res/icons/enhems16.png";
 	private EnhemsDataModel dataModel;
 	private Timer refreshDataModelTimer = new Timer();
 	
 
 	public Enhems() {
 		setTitle("EnhemsApp");
-		Utilities.setEnhemsIconToFrame(this);
+		CommonUtilities.setEnhemsIconToFrame(this);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -96,23 +96,21 @@ public class Enhems extends JFrame {
 	private void mainGUI(String[] units) {
 		
 		dataModel = new EnhemsDataModel(units);
+
 		//refresh data periodically
 		initTimerRefresh(dataModel);
-		
-		JPanel centerPanel = new JPanel(new GridLayout(1,0));
-		GraphPanel graphPanel = new GraphPanel("Graf", dataModel);
-		centerPanel.add(graphPanel);
 
 		//put in system tray if possible
-		if(SystemTray.isSupported()) {
-			createSystemTray();
-		} else {
-			Utilities.showErrorDialog("Warning", "System tray not supported", this, null);
-		}
+		CreateSystemTray.create(this);
 
 		//refresh GUI for main interface
 		getContentPane().removeAll();
 		getContentPane().repaint();
+
+		JPanel centerPanel = new JPanel(new GridLayout(1,0));
+		GraphPanel graphPanel = new GraphPanel("Graf", dataModel);
+		centerPanel.add(graphPanel);
+
 
 		setLayout(new BorderLayout());
 		JPanel upperPanel = new JPanel(new GridBagLayout());
@@ -121,11 +119,11 @@ public class Enhems extends JFrame {
 		ControlPanel controlPanel = new ControlPanel(
 				"Kontrole", 10, BoxLayout.Y_AXIS, TitledBorder.CENTER, dataModel);
 		MeasuredUnitPanel humidityPanel = new MeasuredUnitPanel(
-				"Vlažnost", "res/icons/humidity.png", dataModel, GraphCodes.humidity);
+				"Vlažnost", "humidity.png", dataModel, GraphCodes.humidity);
 		MeasuredUnitPanel co2Panel = new MeasuredUnitPanel(
-				"CO2", "res/icons/co2.png", dataModel, GraphCodes.co2);
+				"CO2", "co2.png", dataModel, GraphCodes.co2);
 		MeasuredUnitPanel temperaturePanel = new MeasuredUnitPanel(
-				"Temperatura", "res/icons/temperature.png", dataModel, GraphCodes.temperature);
+				"Temperatura", "temperature.png", dataModel, GraphCodes.temperature);
 		
 		leftPanel.setBorder(BorderFactory.createEmptyBorder(0,10,10,10));
 		GridBagConstraints c = new GridBagConstraints();
@@ -167,7 +165,7 @@ public class Enhems extends JFrame {
 			ServerService.executeRequest(new ServerRequest() {
 				public void execute() {
 					ImageIcon loadingIcon = new ImageIcon(
-							Utilities.class.getResource(pathToLoadingIcon));
+							CommonUtilities.getImageByName("loading.gif"));
 					refreshButton.setHorizontalTextPosition(JButton.LEFT);
 					refreshButton.setIcon(loadingIcon);
 					refreshButton.setEnabled(false);
@@ -218,7 +216,7 @@ public class Enhems extends JFrame {
 		
 		//or 1024x620
 		setSize(930, 580);
-		Utilities.putFrameInScreenCenter(this);
+		CommonUtilities.putFrameInScreenCenter(this);
 		
 		
 		dataModel.setSelectedRoom((String)roomSelected.getSelectedItem());
@@ -257,56 +255,6 @@ public class Enhems extends JFrame {
 		return dataModel;
 	}
 
-	private void createSystemTray() {
-		TrayIcon trayIcon;
-		SystemTray tray = SystemTray.getSystemTray();
-		BufferedImage trayIconImage = null;
-		try {
-			trayIconImage = ImageIO.read(getClass().getResource(pathToLoadTrayIcon));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		int trayIconWidth = new TrayIcon(trayIconImage).getSize().width;
-		Image image = trayIconImage.getScaledInstance(trayIconWidth, -1, Image.SCALE_SMOOTH);
-		ActionListener exitListener= e -> {
-			System.exit(0);
-		};
-		PopupMenu popup=new PopupMenu();
-		MenuItem defaultItem=new MenuItem("Exit");
-		defaultItem.addActionListener(exitListener);
-		popup.add(defaultItem);
-		defaultItem=new MenuItem("Open");
-		trayIcon = new TrayIcon(image,"Tray Icon", popup);
-		trayIcon.setImageAutoSize(true);
-		defaultItem.addActionListener(e -> fromSystemTray());
-		popup.add(defaultItem);
 
-
-		addWindowStateListener(e -> {
-			System.out.println(e.getNewState());
-			if(e.getNewState()==ICONIFIED){
-				toSystemTray(tray,trayIcon);
-			}
-		});
-
-		toSystemTray(tray,trayIcon);
-
-	}
-
-	private void toSystemTray(SystemTray tray, TrayIcon icon) {
-		try {
-			if(!Arrays.asList(tray.getTrayIcons()).contains(icon)) {
-				tray.add(icon);
-			}
-			dispose();
-		} catch (AWTException ex) {
-			Utilities.showErrorDialog("Error", "Program cannot be added to system tray!", this, ex);
-		}
-	}
-
-	private void fromSystemTray() {
-		setState(0);
-		setVisible(true);
-	}
 
 }

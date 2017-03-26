@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import enhems.DataListener;
 import enhems.EnhemsDataModel;
 import enhems.GraphCodes;
-import enhems.Utilities;
+import enhems.utilities.CommonUtilities;
 
 public class GraphPanel extends JPanel implements DataListener{
 
@@ -43,12 +43,8 @@ public class GraphPanel extends JPanel implements DataListener{
 		dataModel.addListener(this);
 		setLayout(new BorderLayout());
 		setBorder(BorderFactory.createTitledBorder(meassTxt));
-		try {
-			imagePanel = new ImagePanel(ImageIO.read(
-					Utilities.class.getResource("res/icons/enhemsBig.png")));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		imagePanel = new ImagePanel(CommonUtilities.getImageByName("enhemsBig.png"));
+
 		imagePanel.setBorder(BorderFactory.createEtchedBorder());
 		graph = new JPanel(new GridBagLayout());
 		ElementsCustomPanel intervalPanel = 

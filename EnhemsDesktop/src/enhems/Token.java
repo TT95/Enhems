@@ -1,6 +1,8 @@
 package enhems;
 
-	import java.io.IOException;
+	import enhems.utilities.CommonUtilities;
+
+    import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -70,7 +72,7 @@ public class Token {
 			}
 			bytes = Files.readAllBytes(tokenPath);
 		} catch (IOException e) {
-			Utilities.showErrorDialog("Error", 
+			CommonUtilities.showErrorDialog("Error",
 					"Nastala je greška prilikom dohvata tokena! "
 					+ "Provjerite da se u direktoriju aplikacije nalazi prikladni folder \"data\".",
 					null, e);
@@ -88,7 +90,7 @@ public class Token {
 			}
 			bytes = Files.readAllBytes(usernamePath);
 		} catch (IOException e) {
-			Utilities.showErrorDialog("Error", 
+			CommonUtilities.showErrorDialog("Error",
 					"Nastala je greška prilikom dohvata usernamea! "
 					+ "Provjerite da se u direktoriju aplikacije nalazi prikladni folder \"data\".",
 					null, e);
@@ -114,7 +116,7 @@ public class Token {
 			Files.deleteIfExists(Paths.get(pathToToken));
 			Files.deleteIfExists(Paths.get(pathToUsername));
 		} catch (IOException e) {
-			Utilities.showErrorDialog("Error", "Problem kod dohvacanja log datoteka", null, e);
+			CommonUtilities.showErrorDialog("Error", "Problem kod dohvacanja log datoteka", null, e);
 		}
 	}
 	

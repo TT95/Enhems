@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.security.KeyStore;
 import java.security.Security;
 
+import enhems.utilities.CommonUtilities;
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
@@ -91,7 +92,7 @@ public class AppHttpClient extends DefaultHttpClient {
            return sf;
        } catch (Exception ex) {
     	   if(ex instanceof IOException) {
-    		   Utilities.showErrorDialog("Greška",
+    		   CommonUtilities.showErrorDialog("Greška",
     				   "Nastala je greška prilikom dohvata certifikata! "
     					+ "Provjerite da se u direktoriju aplikacije nalazi prikladni folder \"data\".",null, ex);
     	   }
