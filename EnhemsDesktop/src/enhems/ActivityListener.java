@@ -55,7 +55,7 @@ public class ActivityListener implements NativeMouseMotionListener{
 
         mouseMoved = false;
         scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new MouseMotion(), 5, 5, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(new MouseMotion(), 1, 1, TimeUnit.MINUTES);
     }
 
 

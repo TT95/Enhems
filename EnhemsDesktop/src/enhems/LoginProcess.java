@@ -171,8 +171,7 @@ public class LoginProcess {
 	}
 	
 	private static void showLoadingIcon() {
-		ImageIcon loadingIcon = new ImageIcon(
-				CommonUtilities.class.getResource(pathToLoadingIcon));
+		ImageIcon loadingIcon = new ImageIcon(CommonUtilities.getImageByName("loading.gif"));
 		button.setHorizontalTextPosition(JButton.LEFT);
 		button.setIcon(loadingIcon);
 		button.setEnabled(false);

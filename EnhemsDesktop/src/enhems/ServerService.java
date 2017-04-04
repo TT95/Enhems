@@ -8,6 +8,7 @@ import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
@@ -51,8 +52,10 @@ public class ServerService {
             EntityUtils.consume(response.getEntity()); // to deallocate connection
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == 200) {
-            	request.releaseConnection();
+                request.releaseConnection();
                 return null;//sucess
+            } else {
+                showErrorToUser(statusCode, "setting fcspeed");
             }
         } catch (IOException ex) {
         	MyLogger.log("Error setting FCSpeed on server", ex);
@@ -74,8 +77,10 @@ public class ServerService {
             EntityUtils.consume(response.getEntity()); // to deallocate connection
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == 200) {
-            	request.releaseConnection();
+                request.releaseConnection();
                 return null;//sucess
+            } else {
+                showErrorToUser(statusCode, "setting temperature setpoint");
             }
         } catch (IOException ex) {
         	MyLogger.log("Error setting setpoint on server", ex);
@@ -93,7 +98,7 @@ public class ServerService {
         HttpPost request = new HttpPost(serverRoot + "activity");
         List<NameValuePair> params = new ArrayList<>();
         //server needs 0 or 1 for activity
-        int active = activity==false? 0 : 1;
+        int active = !activity? 0 : 1;
         params.add(new BasicNameValuePair("activity", active + ""));
         params.add(new BasicNameValuePair("token", Token.getToken()));
         try {
@@ -104,9 +109,12 @@ public class ServerService {
             if (statusCode == 200) {
                 request.releaseConnection();
                 return;
+            } else {
+                showErrorToUser(statusCode, "sending mouse activity");
             }
         } catch (IOException ex) {
-            MyLogger.log("Error setting activity on server", ex);
+            CommonUtilities.showErrorDialog("Warning", "There was problem with" +
+                    "sending mouse activity to server. Logged.", null, ex);
         }
         request.releaseConnection();
     }
@@ -126,11 +134,14 @@ public class ServerService {
             String data = URLDecoder.decode(EntityUtils.toString(response.getEntity(),
             		Charset.defaultCharset().name()), "UTF-8");
             if (statusCode == 200) {
-            	request.releaseConnection();
+                request.releaseConnection();
                 return data.split("&");
+            } else {
+                showErrorToUser(statusCode, "getting selected room data");
             }
         } catch (IOException ex) {
-        	MyLogger.log("Error getting current values from server", ex);
+        	CommonUtilities.showErrorDialog("Error", "Error getting current values from server",
+                    null, ex);
         }
     	request.releaseConnection();
         return new String[]{"---", "---", "---", "---", "---", "---", "---", "---"};
@@ -149,8 +160,10 @@ public class ServerService {
             String data = URLDecoder.decode(EntityUtils.toString(response.getEntity(),
             		Charset.defaultCharset().name()), "UTF-8");
             if (statusCode == 200) {
-            	request.releaseConnection();
+                request.releaseConnection();
                 return data.split("&");
+            } else {
+                showErrorToUser(statusCode, "getting assigned units");
             }
         } catch (IOException ex) {
         	MyLogger.log("Error getting current values from server", ex);
@@ -186,10 +199,12 @@ public class ServerService {
 
 			int statusCode = response.getStatusLine().getStatusCode();
 			String token = EntityUtils.toString(response.getEntity());
-			if (statusCode == 200) {
-				Token.setToken(token, username);
-			}
-			request.releaseConnection();
+            if (statusCode == 200) {
+                Token.setToken(token, username);
+            } else {
+                showErrorToUser(statusCode, "logging in");
+            }
+            request.releaseConnection();
 			return statusCode;
 
 		} catch (IOException ex) {
@@ -236,5 +251,15 @@ public class ServerService {
                  return null;
              }
     }
-    
+
+    /**
+     * This method is used when server doesnt return 200
+     */
+    private static void showErrorToUser(int statusCode, String servletRole) {
+        CommonUtilities.showErrorDialog(
+                "Enhems - warning",
+                "Seems like server responded with status code " + statusCode
+                        + " during: " + servletRole, null, null);
+    }
+
 }

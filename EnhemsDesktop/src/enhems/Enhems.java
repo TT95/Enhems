@@ -107,6 +107,9 @@ public class Enhems extends JFrame {
 		getContentPane().removeAll();
 		getContentPane().repaint();
 
+		//this activates activity listener
+		new ActivityListener();
+
 		JPanel centerPanel = new JPanel(new GridLayout(1,0));
 		GraphPanel graphPanel = new GraphPanel("Graf", dataModel);
 		centerPanel.add(graphPanel);
@@ -221,8 +224,7 @@ public class Enhems extends JFrame {
 		
 		dataModel.setSelectedRoom((String)roomSelected.getSelectedItem());
 
-		//this activates activity listener
-		new ActivityListener();
+
 
 	}
 	

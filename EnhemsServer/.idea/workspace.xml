@@ -26,7 +26,11 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
               <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="e#0#3468#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#954#1073#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -50,7 +54,10 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="476">
               <caret line="52" column="35" lean-forward="false" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="35" />
-              <folding />
+              <folding>
+                <element signature="e#0#2789#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -58,8 +65,8 @@
       <file leaf-file-name="ActivityServlet.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/web/Servlets/ActivityServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="41" column="6" lean-forward="true" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
+            <state relative-caret-position="585">
+              <caret line="58" column="55" lean-forward="true" selection-start-line="58" selection-start-column="55" selection-end-line="58" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -109,7 +116,7 @@
             <state relative-caret-position="833">
               <caret line="65" column="48" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#0#2455#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -120,7 +127,11 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
               <caret line="23" column="21" lean-forward="false" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
-              <folding />
+              <folding>
+                <element signature="e#0#2618#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#796#915#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -175,10 +186,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1288" />
-    <option name="y" value="-256" />
-    <option name="width" value="1296" />
-    <option name="height" value="1000" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -195,7 +206,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -393,14 +404,14 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../EnhemsDesktop" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
@@ -1111,15 +1122,18 @@
       <workItem from="1490469104729" duration="8001000" />
       <workItem from="1490486663209" duration="4037000" />
       <workItem from="1490518981497" duration="271000" />
+      <workItem from="1491298699073" duration="110000" />
+      <workItem from="1491298830309" duration="32000" />
+      <workItem from="1491300724283" duration="2655000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21064000" />
+    <option name="totallyTimeSpent" value="23861000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1288" y="-256" width="1296" height="1000" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1131,15 +1145,15 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25028834" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5916955" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22749591" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23543689" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23146747" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13268608" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12405446" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1203,7 +1217,7 @@
         <state relative-caret-position="629">
           <caret line="53" column="13" lean-forward="false" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#2455#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1275,7 +1289,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#3468#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#954#1073#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1302,7 +1320,7 @@
         <state relative-caret-position="629">
           <caret line="53" column="13" lean-forward="true" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#2455#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1337,7 +1355,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="31" column="13" lean-forward="false" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="e#0#3468#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#954#1073#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1371,7 +1393,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="31" column="13" lean-forward="false" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="e#0#3468#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#954#1073#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1575,7 +1601,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#3468#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#954#1073#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1584,7 +1614,7 @@
         <state relative-caret-position="833">
           <caret line="65" column="48" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#2455#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1593,7 +1623,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="52" column="35" lean-forward="false" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="35" />
-          <folding />
+          <folding>
+            <element signature="e#0#2789#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1601,14 +1634,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="23" column="21" lean-forward="false" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
-          <folding />
+          <folding>
+            <element signature="e#0#2618#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#796#915#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/web/Servlets/ActivityServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="41" column="6" lean-forward="true" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
+        <state relative-caret-position="585">
+          <caret line="58" column="55" lean-forward="true" selection-start-line="58" selection-start-column="55" selection-end-line="58" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
