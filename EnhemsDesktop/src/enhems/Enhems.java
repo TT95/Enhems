@@ -59,6 +59,17 @@ public class Enhems extends JFrame {
 		loginGUI();
 	}
 
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(()-> {
+			try {
+				UIManager.setLookAndFeel(
+						"com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			} catch (Exception ignorable) { }
+			new Enhems();
+
+		});
+	}
+
 	/**
 	 * starts login process and if connection to server is made
 	 * method mainGUI is started which builds GUI
@@ -237,20 +248,9 @@ public class Enhems extends JFrame {
             	dataModel.refreshData();
             }
         };
-        
+
 		int refreshPeriod = 1200000;
         refreshDataModelTimer.schedule(userTask, refreshPeriod, refreshPeriod);
-	}
-
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(()-> {
-			try {
-				UIManager.setLookAndFeel(
-						"com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-			} catch (Exception ignorable) { }
-			new Enhems();
-			
-		});
 	}
 
 	public EnhemsDataModel getDataModel() {

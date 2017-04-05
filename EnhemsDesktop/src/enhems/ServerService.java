@@ -30,9 +30,7 @@ public class ServerService {
 
 	public static void executeRequest(ServerRequest request) {
 		new Thread(()-> {
-//			System.out.println("krenuo "+request);
 			request.execute();
-//			System.out.println("zavrsio "+request);
 			SwingUtilities.invokeLater(()-> {
 				request.afterExecution();
 			});
@@ -53,7 +51,7 @@ public class ServerService {
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == 200) {
                 request.releaseConnection();
-                return null;//sucess
+                return null;
             } else {
                 showErrorToUser(statusCode, "setting fcspeed");
             }
