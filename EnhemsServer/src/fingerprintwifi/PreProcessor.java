@@ -55,14 +55,19 @@ public class PreProcessor {
                 );
                 BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 
-                String roomName;
                 //ROOMS
-                while (true) {
+                String roomName = "";
+                String lastReadLine = "";
+                while (lastReadLine!=null) {
                     //MAC is the key, value is list of RSS values
                     HashMap<String,List<Integer>> roomValuesMap;
-
-                    String fingerprintName = br.readLine().replace("Fingerprint name:", "").trim();
-                     roomName = br.readLine().replace("Room name:", "").trim();
+                    String fingerprintName;
+                    if (lastReadLine.isEmpty()) {
+                        fingerprintName = br.readLine().replace("Fingerprint name:", "").trim();
+                    } else{
+                        fingerprintName = lastReadLine;
+                    }
+                    roomName = br.readLine().replace("Room name:", "").trim();
 
                     //if room already exists in data
                     if (fingerprintMap.containsKey(roomName)) {
@@ -123,16 +128,27 @@ public class PreProcessor {
                     if (!fingerprintMap.containsKey(roomName)) {
                         fingerprintMap.put(roomName, roomValuesMap);
                     }
-                    break;
+
+
+                    while (true) {
+                        lastReadLine = br.readLine();
+                        if (lastReadLine == null || !lastReadLine.isEmpty()) {
+                            break;
+                        }
+                    }
                 }
-                System.out.println(fingerprintMap.toString());
                 br.close();
             } catch (IOException ex) {
                 System.err.println("Problem reading file!");
                 ex.printStackTrace();
             }
         }
+                storeToFile(fingerprintMap);
 
+    }
+
+    private static void storeToFile(HashMap<String, HashMap<String, List<Integer>>> fingerprintMap) {
+        System.out.println(fingerprintMap);
     }
 
 
