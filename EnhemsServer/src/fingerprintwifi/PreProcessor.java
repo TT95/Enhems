@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,19 +34,33 @@ import java.util.regex.Pattern;
  */
 public class PreProcessor {
 
-    public static void main(String[] args) {
+    /**
+     * Returning map of rooms and theirs associated pair (mac address, rss mean value).
+     * @param pathToFiles path to files which must be inside fingerprintwifi folder.
+     * @return map of rooms and theirs associated pair (mac address, rss mean value).
+     */
+    public static Map<String, Map<String, Double>> meanValuesMap(String[] pathToFiles) {
+        HashMap<String, HashMap<String, List<Integer>>> fingerprintMap = parseAllFilesToMap(pathToFiles);
+        if (fingerprintMap == null) {
+            System.err.println("Error occured!");
+        }
+        Map<String, Map<String, Double>> fingerPrintMeanMap = calculateMeanValues(fingerprintMap);
+        return fingerPrintMeanMap;
+    }
 
-        if (args.length == 0) {
+    private static HashMap<String,HashMap<String,List<Integer>>> parseAllFilesToMap(String[] pathToFiles) {
+
+        if (pathToFiles.length == 0) {
             System.err.println("Provide at least one input file!");
-            return;
+            return null;
         }
 
         //roomValueMap is the value, key is the room name
         HashMap<String,HashMap<String,List<Integer>>> fingerprintMap = new HashMap<>();
 
         //FILES
-        for(int fileNum = 0; fileNum < args.length; fileNum++) {
-            String inputFile = args[fileNum];
+        for(int fileNum = 0; fileNum < pathToFiles.length; fileNum++) {
+            String inputFile = pathToFiles[fileNum];
             try {
                 FileInputStream stream = new FileInputStream(
                         System.getProperty("user.dir")
@@ -143,8 +158,30 @@ public class PreProcessor {
                 ex.printStackTrace();
             }
         }
-                storeToFile(fingerprintMap);
+        return fingerprintMap;
 
+    }
+
+    private static Map<String, Map<String,Double>> calculateMeanValues
+            (HashMap<String, HashMap<String, List<Integer>>> fingerprintMap) {
+        Map<String, Map<String, Double>> fingerprintMeanMap = new HashMap<>();
+        for (Map.Entry<String, HashMap<String, List<Integer>>> entry : fingerprintMap.entrySet()) {
+            String roomName = entry.getKey();
+            HashMap<String, List<Integer>> roomValuesMap = entry.getValue();
+            Map<String, Double> meanValuesMap = new HashMap<>();
+            for (Map.Entry<String, List<Integer>> entryRoomMap : roomValuesMap.entrySet()) {
+                String mac = entryRoomMap.getKey();
+                List<Integer> rsss = entryRoomMap.getValue();
+                Double sumOfRsss = 0.0;
+                for (Integer rss : rsss) {
+                    sumOfRsss += rss;
+                }
+                Double meanValue = sumOfRsss / rsss.size();
+                meanValuesMap.put(mac, meanValue);
+            }
+            fingerprintMeanMap.put(roomName, meanValuesMap);
+        }
+        return fingerprintMeanMap;
     }
 
     private static void storeToFile(HashMap<String, HashMap<String, List<Integer>>> fingerprintMap) {
