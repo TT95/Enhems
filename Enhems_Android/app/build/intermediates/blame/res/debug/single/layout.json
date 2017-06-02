@@ -24,12 +24,12 @@
         "source": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/src/main/res/layout/dialog_settemp.xml"
     },
     {
-        "merged": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/build/intermediates/res/merged/debug/layout/activity_current.xml",
-        "source": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/src/main/res/layout/activity_current.xml"
-    },
-    {
         "merged": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/build/intermediates/res/merged/debug/layout/menu_control.xml",
         "source": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/src/main/res/layout/menu_control.xml"
+    },
+    {
+        "merged": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/build/intermediates/res/merged/debug/layout/activity_current.xml",
+        "source": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/src/main/res/layout/activity_current.xml"
     },
     {
         "merged": "/home/teo/IdeaProjects/Enhems/Enhems_Android/app/build/intermediates/res/merged/debug/layout/dialog_control.xml",

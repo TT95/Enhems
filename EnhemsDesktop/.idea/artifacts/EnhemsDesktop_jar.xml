@@ -1,0 +1,25 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="EnhemsDesktop:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/EnhemsDesktop_jar</output-path>
+    <root id="root">
+      <element id="archive" name="EnhemsDesktop.jar">
+        <element id="module-output" name="EnhemsDesktop" />
+      </element>
+      <element id="library" level="module" name="httpcore-4.4.jar" module-name="EnhemsDesktop" />
+      <element id="library" level="module" name="httpclient-win-4.4.jar" module-name="EnhemsDesktop" />
+      <element id="library" level="module" name="commons-codec-1.9.jar" module-name="EnhemsDesktop" />
+      <element id="library" level="module" name="httpclient-cache-4.4.jar" module-name="EnhemsDesktop" />
+      <element id="library" level="module" name="gral-core-0.10.jar" module-name="EnhemsDesktop" />
+      <element id="library" level="module" name="jna-platform-4.1.0.jar" module-name="EnhemsDesktop" />
+      <element id="library" level="module" name="bcprov-jdk15on-154.jar" module-name="EnhemsDesktop" />
+      <element id="library" level="module" name="VectorGraphics2D-0.9.1.jar" module-name="EnhemsDesktop" />
+      <element id="library" level="module" name="fluent-hc-4.4.jar" module-name="EnhemsDesktop" />
+      <element id="library" level="module" name="gson-2.3.1.jar" module-name="EnhemsDesktop" />
+      <element id="library" level="module" name="httpmime-4.4.jar" module-name="EnhemsDesktop" />
+      <element id="library" level="module" name="httpclient-4.4.jar" module-name="EnhemsDesktop" />
+      <element id="library" level="module" name="jna-4.1.0.jar" module-name="EnhemsDesktop" />
+      <element id="library" level="module" name="commons-logging-1.2.jar" module-name="EnhemsDesktop" />
+      <element id="library" level="module" name="httpclient-4.5.1.jar" module-name="EnhemsDesktop" />
+    </root>
+  </artifact>
+</component>

@@ -25,6 +25,7 @@ import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.SingleClientConnManager;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 
 /**
  *
@@ -62,7 +63,7 @@ public class AppHttpClient extends DefaultHttpClient {
         // Register for port 8443 our SSLSocketFactory with our keystore
         // to the ConnectionManager
         registry.register(new Scheme("https", newSslSocketFactory(), 8443));
-        return new SingleClientConnManager(getParams(), registry);
+        return new ThreadSafeClientConnManager(getParams(), registry);
     }
 
     /**
