@@ -1,6 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".CurrentActivity">
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".CurrentActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <item android:id="@+id/action_refresh" android:title="@string/action_refresh"
         android:orderInCategory="100"  android:showAsAction="ifRoom"/>
     <item android:id="@+id/action_logout" android:title="@string/action_logout"

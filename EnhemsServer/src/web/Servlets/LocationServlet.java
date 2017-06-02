@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  * around him and should return name of the room he is in.
  *
  */
-@WebServlet(name = "LocationServlet", urlPatterns = {"/location"})
+@WebServlet(name = "LocationServlet", urlPatterns = {"/Location"})
 public class LocationServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
