@@ -34,4 +34,8 @@ public class CommonUtilities {
             return prop;
         }
     }
+
+    public static String getPathToResourceFile(String propFileName) {
+        return  CommonUtilities.class.getClassLoader().getResource(propFileName).getPath();
+    }
 }

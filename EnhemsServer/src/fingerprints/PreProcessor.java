@@ -1,4 +1,4 @@
-package fingerprintwifi;
+package fingerprints;
 
 import java.io.*;
 import java.util.HashMap;
@@ -63,10 +63,7 @@ public class PreProcessor {
             String inputFile = pathToFiles[fileNum];
             try {
                 FileInputStream stream = new FileInputStream(
-                        System.getProperty("user.dir")
-                                + File.separator + "src"
-                                + File.separator + "fingerprintwifi"
-                                + File.separator + inputFile
+                        inputFile
                 );
                 BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 
