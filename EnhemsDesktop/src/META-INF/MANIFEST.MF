@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Class-Path: httpcore-4.4.jar httpclient-win-4.4.jar commons-codec-1.9.
+ jar httpclient-cache-4.4.jar gral-core-0.10.jar jna-platform-4.1.0.ja
+ r bcprov-jdk15on-154.jar VectorGraphics2D-0.9.1.jar fluent-hc-4.4.jar
+  gson-2.3.1.jar httpmime-4.4.jar httpclient-4.4.jar jna-4.1.0.jar com
+ mons-logging-1.2.jar httpclient-4.5.1.jar
+Main-Class: enhems.Enhems
+
