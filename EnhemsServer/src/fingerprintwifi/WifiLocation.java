@@ -29,8 +29,8 @@ public class WifiLocation {
         rsssUser.put("8c:79:67:9d:63:1e", -86);
         rsssUser.put("88:f7:c7:4f:0d:bb", -74);
         rsssUser.put("00:18:9b:6c:c9:78", -84);
-        locate(rsssUser);
-
+        String room = locate(rsssUser);
+        System.out.println(room);
 
     }
 
@@ -38,7 +38,9 @@ public class WifiLocation {
 
         //initialize if doesnt exist
         //TODO put in server initializer
-        fingerprintMeanMap = PreProcessor.meanValuesMap(PATH_TO_FILES);
+        if (fingerprintMeanMap == null) {
+            fingerprintMeanMap = PreProcessor.meanValuesMap(PATH_TO_FILES);
+        }
 
 
         Map<String, Double> likehoods = new HashMap<>();
@@ -49,9 +51,21 @@ public class WifiLocation {
             likehoods.put(room, gaussKernel(rsssUser, meanValuesMap));
         }
 
-        System.out.println(likehoods);
+        //find biggest number
+        String matchingRoom = "";
+        Double likehoodValue = 0.0;
 
-        return null;
+        for (Map.Entry<String, Double> likehoodEntry : likehoods.entrySet()) {
+            if (likehoodValue < likehoodEntry.getValue()) {
+                likehoodValue = likehoodEntry.getValue();
+                matchingRoom = likehoodEntry.getKey();
+            }
+        }
+
+        if (likehoodValue == 0.0) {
+            return "Not fingerprint space!";
+        }
+        return matchingRoom;
     }
 
     /**
@@ -93,6 +107,16 @@ public class WifiLocation {
         rsssUser.put("94:4a:0c:53:d5:d6", -82);
         rsssUser.put("00:18:9b:6c:c9:78", -85);
 
+        Hall up
+        rsssUser.put("ec:8a:4c:92:57:10", -86);
+        rsssUser.put("84:16:f9:01:e5:ae", -77);
+        rsssUser.put("fc:b4:e6:7b:4f:f2", -84);
+        rsssUser.put("cc:03:fa:e4:a0:8b", -55);
+        rsssUser.put("78:96:82:20:df:f2", -64);
+        rsssUser.put("70:5a:9e:a8:f6:3e", -82);
+        rsssUser.put("8c:79:67:9d:63:1e", -86);
+        rsssUser.put("88:f7:c7:4f:0d:bb", -74);
+        rsssUser.put("00:18:9b:6c:c9:78", -84);
 
 
      */
