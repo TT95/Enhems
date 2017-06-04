@@ -4,7 +4,7 @@
     api-level="23"
     density="xxhdpi"
     format="7"
-    timestamp="101288957030336"
+    timestamp="169169862795971"
     token="-742385780855750024" >
 
     <task
@@ -20,16 +20,16 @@
         name="verifier"
         duration="0" />
 
-    <build timestamp="100869448731902" >
+    <build timestamp="167626175230245" >
         <artifact
             location="/home/teo/IdeaProjects/Enhems/Enhems_Android/app/build/outputs/apk/app-debug.apk"
             type="MAIN" />
     </build>
-    <build timestamp="100985995028061" >
+    <build timestamp="169139142955459" >
         <artifact
             location="/home/teo/IdeaProjects/Enhems/Enhems_Android/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5/classes.dex"
             type="DEX" />
     </build>
-    <build timestamp="101288957030336" />
+    <build timestamp="169169862795971" />
 
 </instant-run>

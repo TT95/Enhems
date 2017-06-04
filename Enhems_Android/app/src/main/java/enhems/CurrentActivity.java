@@ -458,19 +458,20 @@ public class CurrentActivity extends Activity {
         }
     }
     private static WifiReceiver receiverWifi;
+    private static WifiManager wifi;
     private void startWifiScanning() {
-        final WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         wifi.setWifiEnabled(true);
         receiverWifi = new WifiReceiver(wifi);
         registerReceiver(receiverWifi, new IntentFilter(
                 WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
-        Timer t = new Timer();
-        t.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                wifi.startScan();
-            }
-        }, 0,INTERVAL_FOR_SCAN);
+//        Timer t = new Timer();
+//        t.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                wifi.startScan();
+//            }
+//        }, 0,INTERVAL_FOR_SCAN);
         wifi.startScan();
     }
     class WifiReceiver extends BroadcastReceiver {
@@ -479,7 +480,6 @@ public class CurrentActivity extends Activity {
             this.wifi = wifi;
         }
         public void onReceive(Context c, Intent intent) {
-            System.out.println("josko");
             List<ScanResult> wifiList = wifi.getScanResults();
             String string = "";
             //json for sending wifi location
@@ -497,6 +497,7 @@ public class CurrentActivity extends Activity {
             }
 
             new LocationTask().execute(json);
+
 //            Thread locationThread = new Thread(new Runnable() {
 //                @Override
 //                public void run(){
@@ -504,7 +505,6 @@ public class CurrentActivity extends Activity {
 //                }
 //            });
 //            locationThread.start();
-            wifi.startScan();
 
         }
     }
@@ -527,6 +527,7 @@ public class CurrentActivity extends Activity {
                     TextView textView = (TextView) findViewById(R.id.location);
                     String locationText = "Location: " + room;
                     textView.setText(locationText);
+            wifi.startScan();
         }
     }
     public void writeToLocationFIeld(final String string) {
