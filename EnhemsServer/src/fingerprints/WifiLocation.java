@@ -1,5 +1,6 @@
-package fingerprintwifi;
+package fingerprints;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,13 +10,15 @@ import java.util.Map;
 public class WifiLocation {
 
     private static String[] PATH_TO_FILES = new String[]{
-            "hometest/RSSFingerPrintTeoDoma.txt",
-            "hometest/RSSFingerPrintTomislavDoma.txt"
+            WifiLocation.class.getClassLoader().getResource(
+                    "fingerprints/hometest/RSSFingerPrintTeoDoma.txt").getPath(),
+            WifiLocation.class.getClassLoader().getResource(
+                    "fingerprints/hometest/RSSFingerPrintTomislavDoma.txt").getPath()
     };
 
     private static Map<String, Map<String, Double>> fingerprintMeanMap;
 
-    private static Double SIGMA = 0.25;
+    private static Double SIGMA = 0.4;
 
     public static void main(String[] args) {
 
@@ -61,7 +64,7 @@ public class WifiLocation {
                 matchingRoom = likehoodEntry.getKey();
             }
         }
-
+        System.out.println(likehoods);
         if (likehoodValue == 0.0) {
             return "Not fingerprint space!";
         }

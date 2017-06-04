@@ -1,8 +1,6 @@
 package web.Servlets;
 
-import dao.SQLDao;
-import dao.models.User;
-import org.json.HTTP;
+import fingerprints.WifiLocation;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,12 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by Teo on 6/2/2017.
@@ -55,29 +52,33 @@ public class LocationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        StringBuffer jb = new StringBuffer();
-        String line;
+        String rsss=(String)request.getParameter("rsss");
+        JSONObject json;
+        Map<String,Integer> rsssUser = new HashMap<>();
         try {
-            BufferedReader reader = request.getReader();
-            while ((line = reader.readLine()) != null)
-                jb.append(line);
-        } catch (Exception e) { /*report an error*/ }
-
-        try {
-            JSONObject jsonObject =  HTTP.toJSONObject(jb.toString());
-            System.out.println(jsonObject);
-
-            
-
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
-            out.append("Your string goes here");
-            out.close();
-
-        } catch (JSONException e) {
-            // crash and burn
-            throw new IOException("Error parsing JSON request string");
+            json = new JSONObject(rsss);
+            Iterator<?> keys = json.keys();
+            while( keys.hasNext() ) {
+                String key = (String)keys.next();
+                Integer rss = (Integer) json.get(key);
+                rsssUser.put(key, rss);
+            }
+        } catch (JSONException ex) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
         }
+        String room = WifiLocation.locate(rsssUser);
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("text/plain");
+        response.setContentLength(room.length());
+        try (InputStream in = new ByteArrayInputStream(room.getBytes(StandardCharsets.UTF_8)); OutputStream out = response.getOutputStream()) {
+            byte[] buf = new byte[1024];
+            int count;
+            while ((count = in.read(buf)) >= 0) {
+                out.write(buf, 0, count);
+            }
+        }
+
     }
 
 }
