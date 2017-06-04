@@ -17,6 +17,8 @@ import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.apache.http.annotation.ThreadSafe;
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
@@ -31,6 +33,7 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
  *
  * @author Stjepan
  */
+@ThreadSafe
 public class AppHttpClient extends DefaultHttpClient {
 
     /**
@@ -58,6 +61,7 @@ public class AppHttpClient extends DefaultHttpClient {
      */
     @Override
     protected ClientConnectionManager createClientConnectionManager() {
+
         SchemeRegistry registry = new SchemeRegistry();
         registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 8084));
         // Register for port 8443 our SSLSocketFactory with our keystore

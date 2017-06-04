@@ -31,18 +31,21 @@ public class WifiLocation {
      * @return String array of current room data
      */
     public static String GetData(Context context, JSONObject rsss) {
+        System.out.println(android.os.Process.getThreadPriority(android.os.Process.myTid()) + " INSTANCE");
         HttpClient httpclient = AppHttpClient.GetInstance(context);
         HttpPost request = new HttpPost(context.getString(R.string.root) + "Location");
         List<NameValuePair> params = new ArrayList();
-        System.out.println(rsss.toString());
         params.add(new BasicNameValuePair("rsss", rsss.toString()));
         params.add(new BasicNameValuePair("token", Token.get(context)));
         try {
             request.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+        System.out.println(android.os.Process.getThreadPriority(android.os.Process.myTid()) + " ENTER");
             HttpResponse response = httpclient.execute(request);
+        System.out.println(android.os.Process.getThreadPriority(android.os.Process.myTid()) + " EXIT");
             int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode == 200) {
                 String room = URLDecoder.decode(EntityUtils.toString(response.getEntity(), Charset.defaultCharset().name()), "UTF-8");
+        System.out.println(android.os.Process.getThreadPriority(android.os.Process.myTid()) + " RESULT " + room);
                 return room;
             }
         } catch (IOException ex) {
