@@ -36,11 +36,11 @@ public class PreProcessor {
 
     /**
      * Returning map of rooms and theirs associated pair (mac address, rss mean value).
-     * @param pathToFiles path to files which must be inside fingerprintwifi folder.
+     * @param streamsToFiles path to files which must be inside fingerprintwifi folder.
      * @return map of rooms and theirs associated pair (mac address, rss mean value).
      */
-    public static Map<String, Map<String, Double>> meanValuesMap(String[] pathToFiles) {
-        HashMap<String, HashMap<String, List<Integer>>> fingerprintMap = parseAllFilesToMap(pathToFiles);
+    public static Map<String, Map<String, Double>> meanValuesMap(InputStream[] streamsToFiles) {
+        HashMap<String, HashMap<String, List<Integer>>> fingerprintMap = parseAllFilesToMap(streamsToFiles);
         if (fingerprintMap == null) {
             System.err.println("Error occured!");
         }
@@ -48,9 +48,9 @@ public class PreProcessor {
         return fingerPrintMeanMap;
     }
 
-    private static HashMap<String,HashMap<String,List<Integer>>> parseAllFilesToMap(String[] pathToFiles) {
+    private static HashMap<String,HashMap<String,List<Integer>>> parseAllFilesToMap(InputStream[] streamsToFiles) {
 
-        if (pathToFiles.length == 0) {
+        if (streamsToFiles.length == 0) {
             System.err.println("Provide at least one input file!");
             return null;
         }
@@ -59,13 +59,9 @@ public class PreProcessor {
         HashMap<String,HashMap<String,List<Integer>>> fingerprintMap = new HashMap<>();
 
         //FILES
-        for(int fileNum = 0; fileNum < pathToFiles.length; fileNum++) {
-            String inputFile = pathToFiles[fileNum];
+        for(int fileNum = 0; fileNum < streamsToFiles.length; fileNum++) {
             try {
-                FileInputStream stream = new FileInputStream(
-                        inputFile
-                );
-                BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+                BufferedReader br = new BufferedReader(new InputStreamReader(streamsToFiles[fileNum]));
 
                 //ROOMS
                 String roomName = "";

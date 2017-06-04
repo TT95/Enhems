@@ -1,5 +1,5 @@
 Fingerprint name: C9
-Room name: 00
+Room name: C900
 Date: 2017-04-29 12:22:09
 ---------------------
 RASIPwlan (18:ef:63:34:2b:83) [-78 ]
@@ -44,7 +44,7 @@ eduroam (a8:b1:d4:6d:11:51) [-79 -79 -86 ]
 
 
 Fingerprint name: C9
-Room name: 10
+Room name: C910
 Date: 2017-04-29 12:28:04
 ---------------------
 linksys (c8:d7:19:8b:f7:ec) [-85 -92 -87 -81 ]
@@ -86,7 +86,7 @@ eduroam (a8:b1:d4:6d:15:40) [-83 -93 -81 -82 -88 -88 ]
 
 
 Fingerprint name: C9
-Room name: 12a
+Room name: C912a
 Date: 2017-04-29 12:35:12
 ---------------------
 eduroam (a8:b1:d4:9c:34:80) [-87 ]
@@ -124,13 +124,7 @@ B.net_08060 (00:1e:8c:f7:ea:aa) [-88 -95 ]
 
 
 Fingerprint name: C9
-Room name: 12a
-Date: 2017-04-29 12:37:52
----------------------
-
-
-Fingerprint name: C9
-Room name: 06
+Room name: C906
 Date: 2017-04-29 12:39:15
 ---------------------
 linksys (c8:d7:19:8b:f7:ec) [-47 -36 -40 ]
@@ -165,13 +159,7 @@ eduroam (a8:b1:d4:9c:33:b0) [-84 -87 -86 ]
 
 
 Fingerprint name: C9
-Room name: 05
-Date: 2017-04-29 12:41:58
----------------------
-
-
-Fingerprint name: C9
-Room name: 18b
+Room name: C918b
 Date: 2017-04-29 12:44:07
 ---------------------
 dragicevic (70:9f:2d:98:fb:b1) [-95 -92 -94 ]
@@ -219,7 +207,7 @@ B.net_99502 (70:5a:9e:a8:f0:f9) [-96 ]
 
 
 Fingerprint name: C9
-Room name: 18a
+Room name: C918a
 Date: 2017-04-29 12:47:13
 ---------------------
 dragicevic (70:9f:2d:98:fb:b1) [-94 -96 -100 -96 ]
@@ -259,7 +247,7 @@ Unifi2 (46:d9:e7:63:b0:b8) [-95 -93 ]
 
 
 Fingerprint name: C9
-Room name: 02
+Room name: C902
 Date: 2017-04-29 12:53:25
 ---------------------
 linksys (c8:d7:19:8b:f7:ec) [-68 -68 -68 -58 -72 -63 -76 -73 -68 -66 -65 -71 ]
@@ -319,7 +307,7 @@ FERwlan (a8:b1:d4:9c:ee:d1) [-81 -82 -81 ]
 
 
 Fingerprint name: C9
-Room name: 02a
+Room name: C902a
 Date: 2017-04-29 12:55:16
 ---------------------
 linksys (c8:d7:19:8b:f7:ec) [-75 -74 ]
@@ -344,5 +332,3 @@ FERwlan (a8:b1:d4:9c:ee:d1) [-87 ]
 airlive (00:4f:81:07:84:f6) [-92 ]
 TNCAP520629 (c4:ea:1d:52:06:29) [-92 -92 ]
 RIVADISKONT (6c:3b:6b:38:94:37) [-89 ]
-
-

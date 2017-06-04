@@ -1,5 +1,6 @@
 package fingerprints;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,29 +10,39 @@ import java.util.Map;
  */
 public class WifiLocation {
 
-    private static String[] PATH_TO_FILES = new String[]{
-            WifiLocation.class.getClassLoader().getResource(
-                    "fingerprints/hometest/RSSFingerPrintTeoDoma.txt").getPath(),
-            WifiLocation.class.getClassLoader().getResource(
-                    "fingerprints/hometest/RSSFingerPrintTomislavDoma.txt").getPath()
+    private static InputStream[] INPUTSTREAMS_TO_FILES = new InputStream[]{
+            WifiLocation.class.getClassLoader().getResourceAsStream(
+                    "fingerprints/enhems/RSSFingerPrintTeo.txt"),
+            WifiLocation.class.getClassLoader().getResourceAsStream(
+                    "fingerprints/enhems/RSSFingerPrintTomislav.txt"),
+            WifiLocation.class.getClassLoader().getResourceAsStream(
+                    "fingerprints/enhems/RSSFingerPrintBorna.txt")
     };
 
     private static Map<String, Map<String, Double>> fingerprintMeanMap;
 
-    private static Double SIGMA = 0.4;
+    //after some experimenting 0.25 value seems the best
+    private static Double SIGMA = 0.25;
 
     public static void main(String[] args) {
 
         Map<String,Integer> rsssUser = new HashMap<>();
-        rsssUser.put("ec:8a:4c:92:57:10", -86);
-        rsssUser.put("84:16:f9:01:e5:ae", -77);
-        rsssUser.put("fc:b4:e6:7b:4f:f2", -84);
-        rsssUser.put("cc:03:fa:e4:a0:8b", -55);
-        rsssUser.put("78:96:82:20:df:f2", -64);
-        rsssUser.put("70:5a:9e:a8:f6:3e", -82);
-        rsssUser.put("8c:79:67:9d:63:1e", -86);
-        rsssUser.put("88:f7:c7:4f:0d:bb", -74);
-        rsssUser.put("00:18:9b:6c:c9:78", -84);
+        rsssUser.put("dc:7b:94:35:2e:51", -73);
+        rsssUser.put("42:56:0e:5c:cc:67", -81);
+        rsssUser.put("c8:d7:19:8b:f7:ec", -84);
+        rsssUser.put("00:1a:70:4f:11:e5", -85);
+        rsssUser.put("28:10:7b:8c:aa:24", -88);
+        rsssUser.put("54:b8:0a:09:0a:b8", -76);
+        rsssUser.put("dc:7b:94:35:2b:00", -73);
+        rsssUser.put("a8:b1:d4:9c:fc:03", -66);
+        rsssUser.put("a8:b1:d4:9c:fc:01", -61);
+        rsssUser.put("5e:cf:7f:8c:12:33", -81);
+        rsssUser.put("00:26:cb:6a:27:d2", -81);
+        rsssUser.put("58:6d:8f:74:dc:a9", -85);
+        rsssUser.put("dc:7b:94:35:2e:50", -72);
+        rsssUser.put("00:26:cb:6a:27:d1", -85);
+
+
         String room = locate(rsssUser);
         System.out.println(room);
 
@@ -42,9 +53,8 @@ public class WifiLocation {
         //initialize if doesnt exist
         //TODO put in server initializer
         if (fingerprintMeanMap == null) {
-            fingerprintMeanMap = PreProcessor.meanValuesMap(PATH_TO_FILES);
+            fingerprintMeanMap = PreProcessor.meanValuesMap(INPUTSTREAMS_TO_FILES);
         }
-
 
         Map<String, Double> likehoods = new HashMap<>();
 
@@ -94,6 +104,22 @@ public class WifiLocation {
     }
 
     /*
+        C912a
+        rsssUser.put("dc:7b:94:35:2e:51", -73);
+        rsssUser.put("42:56:0e:5c:cc:67", -81);
+        rsssUser.put("c8:d7:19:8b:f7:ec", -84);
+        rsssUser.put("00:1a:70:4f:11:e5", -85);
+        rsssUser.put("28:10:7b:8c:aa:24", -88);
+        rsssUser.put("54:b8:0a:09:0a:b8", -76);
+        rsssUser.put("dc:7b:94:35:2b:00", -73);
+        rsssUser.put("a8:b1:d4:9c:fc:03", -66);
+        rsssUser.put("a8:b1:d4:9c:fc:01", -61);
+        rsssUser.put("5e:cf:7f:8c:12:33", -81);
+        rsssUser.put("00:26:cb:6a:27:d2", -81);
+        rsssUser.put("58:6d:8f:74:dc:a9", -85);
+        rsssUser.put("dc:7b:94:35:2e:50", -72);
+        rsssUser.put("00:26:cb:6a:27:d1", -85);
+
         Tinas room
         rsssUser.put("78:8c:54:03:14:d7", -84);
         rsssUser.put("14:60:80:78:40:d6", -81);
