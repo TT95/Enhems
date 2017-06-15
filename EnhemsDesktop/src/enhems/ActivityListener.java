@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 public class ActivityListener implements NativeMouseMotionListener{
 
     private ScheduledExecutorService scheduler;
+    private static final int minuteInteval = 15;
 
     private boolean mouseMoved;
 
@@ -55,7 +56,7 @@ public class ActivityListener implements NativeMouseMotionListener{
 
         mouseMoved = false;
         scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new MouseMotion(), 1, 1, TimeUnit.MINUTES);
+        scheduler.scheduleAtFixedRate(new MouseMotion(), 1, minuteInteval, TimeUnit.MINUTES);
     }
 
 
