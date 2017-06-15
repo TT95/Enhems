@@ -18,7 +18,8 @@ public class CreateSystemTray {
     public static void create(JFrame frame) {
         CreateSystemTray.frame = frame;
         if(!SystemTray.isSupported()) {
-            CommonUtilities.showErrorDialog("Warning", "System tray not supported", frame, null);
+            CommonUtilities.showDialog("Warning", "System tray not supported", frame,
+                    null, JOptionPane.ERROR_MESSAGE);
             return;
         }
         TrayIcon trayIcon;
@@ -63,7 +64,8 @@ public class CreateSystemTray {
             }
             frame.dispose();
         } catch (AWTException ex) {
-            CommonUtilities.showErrorDialog("Error", "Program cannot be added to system tray!", frame, ex);
+            CommonUtilities.showDialog("Error", "Program cannot be added to system tray!",
+                    frame, ex, JOptionPane.ERROR_MESSAGE);
         }
     }
 }

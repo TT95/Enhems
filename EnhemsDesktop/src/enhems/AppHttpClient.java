@@ -18,6 +18,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
+import javax.swing.*;
+
 /**
 *
 * @author Stjepan
@@ -92,9 +94,10 @@ public class AppHttpClient extends DefaultHttpClient {
            return sf;
        } catch (Exception ex) {
     	   if(ex instanceof IOException) {
-    		   CommonUtilities.showErrorDialog("Greška",
+    		   CommonUtilities.showDialog("Greška",
     				   "Nastala je greška prilikom dohvata certifikata! "
-    					+ "Provjerite da se u direktoriju aplikacije nalazi prikladni folder \"data\".",null, ex);
+    					+ "Provjerite da se u direktoriju aplikacije nalazi prikladni folder \"data\".",null, ex
+               , JOptionPane.ERROR_MESSAGE);
     	   }
            System.exit(1);
        }

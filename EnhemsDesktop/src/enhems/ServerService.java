@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 import javax.imageio.ImageIO;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 import enhems.utilities.CommonUtilities;
 import org.apache.http.HttpResponse;
@@ -26,7 +26,7 @@ import org.apache.http.util.EntityUtils;
 public class ServerService {
 
 //    private static String serverRoot = "https://localhost:8443/EnhemsServer/";
-	private static String serverRoot = "https://161.53.68.191:8444/EnhemsServer/";
+	private static String serverRoot = "https://161.53.68.191:8443/EnhemsServer/";
 
 	public static void executeRequest(ServerRequest request) {
 		new Thread(()-> {
@@ -111,8 +111,8 @@ public class ServerService {
                 showErrorToUser(statusCode, "sending mouse activity");
             }
         } catch (IOException ex) {
-            CommonUtilities.showErrorDialog("Warning", "There was problem with" +
-                    "sending mouse activity to server. Logged.", null, ex);
+            CommonUtilities.showDialog("Warning", "There was problem with" +
+                    "sending mouse activity to server. Logged.", null, ex, JOptionPane.ERROR_MESSAGE);
         }
         request.releaseConnection();
     }
@@ -138,8 +138,8 @@ public class ServerService {
                 showErrorToUser(statusCode, "getting selected room data");
             }
         } catch (IOException ex) {
-        	CommonUtilities.showErrorDialog("Error", "Error getting current values from server",
-                    null, ex);
+        	CommonUtilities.showDialog("Error", "Error getting current values from server",
+                    null, ex, JOptionPane.ERROR_MESSAGE);
         }
     	request.releaseConnection();
         return new String[]{"---", "---", "---", "---", "---", "---", "---", "---"};
@@ -209,7 +209,8 @@ public class ServerService {
 			
 			MyLogger.log("Error doing login on the server", ex);
 			if(ex instanceof ConnectException) {
-				CommonUtilities.showErrorDialog("Error", "Connection timed out.\nServer could be offline.", null, ex);
+				CommonUtilities.showDialog("Error", "Connection timed out.\nServer could be offline.",
+                        null, ex, JOptionPane.ERROR_MESSAGE);
 				System.exit(1);
 			}
 		}
@@ -237,14 +238,15 @@ public class ServerService {
                  } else if (statusCode == 404) {
                      return CommonUtilities.getImageByName("NoData.png");
                  } else {
-                	 CommonUtilities.showErrorDialog("Greška "+statusCode,
-                			 "Greška sa poslužiteljske strane prilikom dohvata grafa", null, null);
+                	 CommonUtilities.showDialog("Greška "+statusCode,
+                			 "Greška sa poslužiteljske strane prilikom dohvata grafa", null,
+                             null, JOptionPane.ERROR_MESSAGE);
                 	 return null;
                  }
              } catch (IOException ex) {
-            	 CommonUtilities.showErrorDialog("Greška",
+            	 CommonUtilities.showDialog("Greška",
             			 "Neuspješno uspostavljanje veze sa poslužiteljem"
-            			 + " prilikom dohvata grafa", null, ex);
+            			 + " prilikom dohvata grafa", null, ex, JOptionPane.ERROR_MESSAGE);
             	 request.releaseConnection();
                  return null;
              }
@@ -254,10 +256,11 @@ public class ServerService {
      * This method is used when server doesnt return 200
      */
     private static void showErrorToUser(int statusCode, String servletRole) {
-        CommonUtilities.showErrorDialog(
+        CommonUtilities.showDialog(
                 "Enhems - warning",
                 "Seems like server responded with status code " + statusCode
-                        + " during: " + servletRole, null, null);
+                        + " during: " + servletRole, null, null,
+                JOptionPane.ERROR_MESSAGE);
     }
 
 }

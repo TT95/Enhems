@@ -73,9 +73,10 @@ public class ControlPanel extends ElementsCustomPanel implements DataListener {
     		try {
     			showChangeDialog( getSetPointValue(),getFCSpeedValue()); 
     		} catch (Exception e) {
-    			CommonUtilities.showErrorDialog("Info", "Vrijednosti se postavljaju prvi puta: \n "
+    			CommonUtilities.showDialog("Info", "Vrijednosti se postavljaju prvi puta: \n "
     					+ "predocene su uobicajene postavke koje trenutno ne vrijede \n"
-    					+ "(setpoint: "+defaultSetpoint+"°C, brzina ventilatora: "+defaultFCspeed+" )", this, e);
+    					+ "(setpoint: "+defaultSetpoint+"°C, brzina ventilatora: "+defaultFCspeed+" )",
+						this, e, JOptionPane.INFORMATION_MESSAGE);
     			showChangeDialog(defaultSetpoint,defaultFCspeed); 
     		}
     		});
@@ -153,9 +154,10 @@ public class ControlPanel extends ElementsCustomPanel implements DataListener {
 				public void afterExecution() {
 					
 					if(setPointRes != null) {
-						CommonUtilities.showErrorDialog("Greška",
+						CommonUtilities.showDialog("Greška",
 								"Greška tijekom postavljanja kontrolnih podataka"
-								+ " (Postavljena temperatura)", null, null);
+								+ " (Postavljena temperatura)", null, null,
+								JOptionPane.ERROR_MESSAGE);
 						setpointField.setText(setPointRes);
 					} else {
 						//TU RECIMO MOZES ZATRAZIT REFRESH SVEGA
@@ -167,9 +169,10 @@ public class ControlPanel extends ElementsCustomPanel implements DataListener {
 					}
 					
 					if(FCspeedRes != null) {
-						CommonUtilities.showErrorDialog("Greška",
+						CommonUtilities.showDialog("Greška",
 								"Greška tijekom postavljanja kontrolnih podataka"
-								+ " (Brzina ventilatora)", null, null);
+								+ " (Brzina ventilatora)", null, null,
+								JOptionPane.ERROR_MESSAGE);
 						fcspeedField.setText(FCspeedRes);
 					} else {
 						//TU RECIMO MOZES ZATRAZIT REFRESH SVEGA

@@ -2,6 +2,7 @@ package enhems;
 
 import enhems.utilities.CommonUtilities;
 
+import javax.swing.*;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,10 +43,10 @@ public class MyLogger {
 		try {
 			fh = new FileHandler("./data/enhemsLog.log", true);
 		} catch (Exception e) {
-			CommonUtilities.showErrorDialog("Error",
+			CommonUtilities.showDialog("Error",
 					"Nastala je greška prilikom dohvata log datoteke! "
 					+ "Provjerite da se u direktoriju aplikacije nalazi prikladni folder \"data\".",
-					null, e);
+					null, e, JOptionPane.ERROR_MESSAGE);
 		}
 		SimpleFormatter sf = new SimpleFormatter();
 		fh.setFormatter(sf);

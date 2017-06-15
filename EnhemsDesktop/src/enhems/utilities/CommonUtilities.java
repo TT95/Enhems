@@ -35,11 +35,12 @@ public class CommonUtilities {
 	 * Shows error to user and writes given desc to logger. If there is no exception just give null,
 	 * this means that program is only talking to user (no logging).
 	 */
-	public static void showErrorDialog(String title, String desc, Component frame, Exception ex) {
+	public static void showDialog(String title, String desc, Component frame,
+								  Exception ex, final int option) {
 		JOptionPane.showMessageDialog(frame,
 				desc,
 				title,
-			    JOptionPane.ERROR_MESSAGE);
+			    option);
 		if(ex != null) {
 			MyLogger.log(desc, ex);
 		}

@@ -12,6 +12,7 @@ import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+	import javax.swing.*;
 
 /**
  * Storing token for sessions with server. Uses symmetric key encryption for safety of
@@ -72,10 +73,10 @@ public class Token {
 			}
 			bytes = Files.readAllBytes(tokenPath);
 		} catch (IOException e) {
-			CommonUtilities.showErrorDialog("Error",
+			CommonUtilities.showDialog("Error",
 					"Nastala je greška prilikom dohvata tokena! "
 					+ "Provjerite da se u direktoriju aplikacije nalazi prikladni folder \"data\".",
-					null, e);
+					null, e, JOptionPane.ERROR_MESSAGE);
 			System.exit(1);
 		}
 		return decrypt(bytes);
@@ -90,10 +91,10 @@ public class Token {
 			}
 			bytes = Files.readAllBytes(usernamePath);
 		} catch (IOException e) {
-			CommonUtilities.showErrorDialog("Error",
+			CommonUtilities.showDialog("Error",
 					"Nastala je greška prilikom dohvata usernamea! "
 					+ "Provjerite da se u direktoriju aplikacije nalazi prikladni folder \"data\".",
-					null, e);
+					null, e, JOptionPane.ERROR_MESSAGE);
 			System.exit(1);
 		}
 		return decrypt(bytes);
@@ -116,7 +117,8 @@ public class Token {
 			Files.deleteIfExists(Paths.get(pathToToken));
 			Files.deleteIfExists(Paths.get(pathToUsername));
 		} catch (IOException e) {
-			CommonUtilities.showErrorDialog("Error", "Problem kod dohvacanja log datoteka", null, e);
+			CommonUtilities.showDialog("Error", "Problem kod dohvacanja log datoteka",
+					null, e, JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
