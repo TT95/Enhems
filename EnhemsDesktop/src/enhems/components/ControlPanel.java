@@ -36,8 +36,8 @@ public class ControlPanel extends ElementsCustomPanel implements DataListener {
 	private String setPointToolTipText="Postavna vrijednost temperature za regulaciju";
 	private String FCSpeedToolTipTeext="Brzina vrtnje ventilatora";
 	private EnhemsDataModel dataModel;
-	private final static int defaultSetpoint = 22;
-	private final static int defaultFCspeed = 0;
+	private final static int defaultSetpoint = 24;
+	private final static int defaultFCspeed = 1;
 	
 	
 	public ControlPanel(String title, int paddings, int axis,
