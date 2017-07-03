@@ -25,8 +25,8 @@ import org.apache.http.util.EntityUtils;
 
 public class ServerService {
 
-//    private static String serverRoot = "https://localhost:8443/EnhemsServer/";
-	private static String serverRoot = "https://161.53.68.191:8443/EnhemsServer/";
+    private static String serverRoot = "https://localhost:8443/EnhemsServer/";
+//	private static String serverRoot = "https://161.53.68.191:8443/EnhemsServer/";
 
 	public static void executeRequest(ServerRequest request) {
 		new Thread(()-> {
@@ -200,7 +200,7 @@ public class ServerService {
             if (statusCode == 200) {
                 Token.setToken(token, username);
             } else {
-                showErrorToUser(statusCode, "logging in");
+//                showErrorToUser(statusCode, "logging in");
             }
             request.releaseConnection();
 			return statusCode;
