@@ -76,7 +76,7 @@ public class WifiLocation {
         }
         System.out.println(likehoods);
         if (likehoodValue == 0.0) {
-            return "Not fingerprint space!";
+            return "Nepostojeci prostor!";
         }
         return matchingRoom;
     }
